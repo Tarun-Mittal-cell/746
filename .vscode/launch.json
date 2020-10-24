@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-Sam2021Application<sam2021>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "com.sam2021.sam2021.Sam2021Application",
+            "projectName": "sam2021",
+            "args": ""
+        }
+    ]
+}
