@@ -1,14 +1,49 @@
 package com.sam2021.sam2021.models;
 
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+
 public class User {
+    @NotNull
+    @NotEmpty(message = "First name can not be empty")
     private String ftname;
+
+    @NotNull
+    @NotEmpty(message = "Last name can not be empty")
     private String ltname;
+
+    @NotNull
+    @Email(message = "Email can not be empty")
+    @NotEmpty(message = "Email can not be empty")
     private String email;
+
+    @NotNull
+    @NotEmpty(message = "Phone Number can not be empty")
     private String phonenumber;
+
+    @NotNull
+    @NotEmpty(message = "Affliliation can not be empty")
     private String affiliation;
+
+    @NotNull
+    @Size(min = 8, max = 20)
+    @NotEmpty(message = "Password can not be empty")
     private String password;
+
+    @NotNull
+    @NotEmpty(message = "Confirm Password can not be empty")
     private String confirmpassword;
+
+    @NotNull(message = "Select a role")
     private AccountType accountType;
+
+    public User(){
+
+    }
 
     public User(String ftname, String ltname, String email, String phonenumber, String affiliation, String password, String confirmpassword,
             AccountType accountType) {
