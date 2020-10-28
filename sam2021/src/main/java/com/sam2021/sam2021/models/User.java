@@ -4,7 +4,9 @@ package com.sam2021.sam2021.models;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+
+import com.sam2021.sam2021.validation.ValidPassword;
+
 
 
 public class User {
@@ -30,8 +32,8 @@ public class User {
     private String affiliation;
 
     @NotNull
-    @Size(min = 8, max = 20)
     @NotEmpty(message = "Password can not be empty")
+    @ValidPassword
     private String password;
 
     @NotNull

@@ -6,8 +6,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
-@Component("passwordValidator")
-public class PasswordValidator implements Validator {
+@Component("PasswordConfirmCheck")
+public class PasswordConfirmCheck implements Validator {
 
     @Override
     public boolean supports(Class<?> clazz) {

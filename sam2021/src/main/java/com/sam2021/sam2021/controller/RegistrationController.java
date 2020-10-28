@@ -6,7 +6,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import com.sam2021.sam2021.models.User;
-import com.sam2021.sam2021.validation.PasswordValidator;
+import com.sam2021.sam2021.validation.PasswordConfirmCheck;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class RegistrationController {
 
     @Autowired
-    private PasswordValidator pwvalid;
+    private PasswordConfirmCheck pwvalid;
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String displayregister(Model model){
