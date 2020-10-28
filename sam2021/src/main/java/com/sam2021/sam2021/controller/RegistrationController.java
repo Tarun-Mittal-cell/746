@@ -1,18 +1,17 @@
 package com.sam2021.sam2021.controller;
 
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.validation.Valid;
 
 import com.sam2021.sam2021.models.User;
-import com.sam2021.sam2021.validation.PasswordConfirmCheck;
+import com.sam2021.sam2021.service.RegistrationService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 
@@ -21,29 +20,33 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class RegistrationController {
 
     @Autowired
-    private PasswordConfirmCheck pwvalid;
+    private RegistrationService regservice;
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String displayregister(Model model){
         User user = new User();
         model.addAttribute("user", user);
-        List<String> accountType = new ArrayList<String>(){{
-            add("Chairman");
-            add("Memeber");
-            add("Author");
-              }};
-        model.addAttribute("accountTypes", accountType);
         return "registration";
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public String userRegistration(final @Valid User user, BindingResult result){
+    public String userRegistration(final @ModelAttribute("user") @Valid User user, BindingResult result){
+        System.out.print(user.getFtname());
+        System.out.print(user.getLtname());
+        System.out.print(user.getEmail());
+        System.out.print(user.getPhonenumber());
+        System.out.print(user.getAccountType());
+        User existing = regservice.findByEmail(user.getEmail());
+        if (existing != null) {
+            result.rejectValue("email", null, "There is already an account registered with that email");
+        }
 
-        pwvalid.validate(user, result);
         if(result.hasErrors()){
             return "registration";
         }
-        return "registration";
+        
+        regservice.save(user);
+        return "login";
     }
     
 

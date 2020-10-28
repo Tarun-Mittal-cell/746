@@ -11,6 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class LoginController {
     @RequestMapping(value="/login", method = RequestMethod.GET)
     public String displayLogin(){
-        return "login";
+        return "hello";
     }
 }

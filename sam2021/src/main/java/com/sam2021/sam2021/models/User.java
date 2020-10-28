@@ -1,6 +1,6 @@
 package com.sam2021.sam2021.models;
 
-
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -8,8 +8,14 @@ import javax.validation.constraints.NotNull;
 import com.sam2021.sam2021.validation.ValidPassword;
 
 
-
+@Entity
+@Table(name="User")
 public class User {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
     @NotNull
     @NotEmpty(message = "First name can not be empty")
     private String ftname;
@@ -36,30 +42,29 @@ public class User {
     @ValidPassword
     private String password;
 
-    @NotNull
-    @NotEmpty(message = "Confirm Password can not be empty")
-    private String confirmpassword;
-
     @NotNull(message = "Select a role")
+    @Enumerated(EnumType.STRING)
     private AccountType accountType;
 
     public User(){
 
     }
 
-    public User(String ftname, String ltname, String email, String phonenumber, String affiliation, String password, String confirmpassword,
-            AccountType accountType) {
+    public User(String ftname, String ltname, String email, String phonenumber, String affiliation, String password, AccountType accountType) {
         this.ftname = ftname;
         this.ltname = ltname;
         this.email = email;
         this.phonenumber = phonenumber;
         this.affiliation = affiliation;
         this.password = password;
-        this.confirmpassword = confirmpassword;
         this.accountType = accountType;
     }
 
     //Getters
+
+    public Long getId() {
+        return id;
+    }
     public String getFtname() {
         return ftname;
     }
@@ -84,15 +89,16 @@ public class User {
         return password;
     }
 
-    public String getConfirmpassword() {
-        return confirmpassword;
-    }
 
     public AccountType getAccountType() {
         return accountType;
     }
 
     //Setters
+
+    public void setId(Long id) {
+        this.id = id;
+    }
     public void setFtname(String ftname) {
         this.ftname = ftname;
     }
@@ -117,17 +123,8 @@ public class User {
         this.password = password;
     }
 
-    public void setConfirmpassword(String confirmpassword) {
-        this.confirmpassword = confirmpassword;
-    }
-
     public void setAccountType(AccountType accountType) {
         this.accountType = accountType;
     }
 }
 
-enum AccountType{
-    Chairman,
-    Member,
-    Author
-}
