@@ -15,12 +15,16 @@
 
 	</div>
 
-	<form action= "/login" method ="post">
+	<form th:action= "@{/login}" method ="post">
+		<div th:if="${param.error}">
+			<div class="alert alert-danger">Invalid username or
+				password.</div>
+		</div>
 
     <div class="form-group">
 
 			<label for="username">Email : </label>
-			<input type ="text" name="Email" class="form-control" required>
+			<input type ="text" th:name="email" class="form-control" required>
 
 		</div>
 
@@ -29,7 +33,7 @@
     <div class="form-group">
 
 			<label for="password">Password : </label>
-			<input type ="password" name="password_1" class="form-control" required>
+			<input type ="password" th:name="password" class="form-control" required>
 			
 		</div>
 
@@ -37,7 +41,7 @@
 
 		<button class="btn btn-success" type = "submit" name ="login_user"> Log In </button>
 
-		<p>New User?<a href="/registration"><b>Register</b></a></p>
+		<p>New User?<a href="/registration.html"><b>Register</b></a></p>
 
 
 </form>
