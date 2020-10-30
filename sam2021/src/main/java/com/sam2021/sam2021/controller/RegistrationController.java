@@ -1,6 +1,7 @@
 package com.sam2021.sam2021.controller;
 
 
+
 import javax.validation.Valid;
 
 import com.sam2021.sam2021.models.User;
@@ -31,11 +32,12 @@ public class RegistrationController {
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public String userRegistration(final @ModelAttribute("user") @Valid User user, BindingResult result){
-        System.out.print(user.getFtname());
-        System.out.print(user.getLtname());
-        System.out.print(user.getEmail());
-        System.out.print(user.getPhonenumber());
-        System.out.print(user.getAccountType());
+        System.out.print(user.getFtname()+"\n");
+        System.out.print(user.getLtname()+"\n");
+        System.out.print(user.getEmail()+"\n");
+        System.out.print(user.getPassword()+"\n");
+        System.out.print(user.getPhonenumber()+"\n");
+        System.out.print(user.getAccountType()+"\n");
         User existing = regservice.findByEmail(user.getEmail());
         if (existing != null) {
             result.rejectValue("email", null, "There is already an account registered with that email");

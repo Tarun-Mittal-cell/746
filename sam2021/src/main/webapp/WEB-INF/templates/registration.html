@@ -16,10 +16,6 @@
 	</div>
 
 	<div class="container">
-	<div th:if="${param.success}">
-		<div class="alert alert-info">You've successfully registered to our awesome app!</div>
-	</div>
-
 	<form th:action="@{/registration}" th:method ="post" th:object="${user}">
 
 
@@ -71,14 +67,14 @@
 			<label>Role</label>
 			<select th:field="*{accountType}" class="form-control">
 				<option value="">Select Role</option>
-				<option th:each="role : ${T(com.sam2021.sam2021.models.AccountType).values()}" th:value="${role}" th:text="${role}"></option>
+				<option th:each="role : ${T(com.sam2021.sam2021.models.AccountTypeEnum).values()}" th:value="${role}" th:text="${role}"></option>
 			</select>
 			<p class="error-message" th:each="error : ${#fields.errors('accountType')}" th:text="${error}">Validation error</p>
 		</div>
 
 		<button class="btn btn-success" type = "submit" name ="reg_user"> Submit </button>
 
-		<p>Already a user?<a href="/login"><b>Log in</b></a></p>
+		<p>Already a user?<a href="/login.html"><b>Log in</b></a></p>
 
 
 </form>

@@ -5,11 +5,11 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-import com.sam2021.sam2021.validation.ValidPassword;
+//import com.sam2021.sam2021.validation.ValidPassword;
 
 
 @Entity
-@Table(name="User")
+@Table(name="user")
 public class User {
 
     @Id
@@ -39,18 +39,18 @@ public class User {
 
     @NotNull
     @NotEmpty(message = "Password can not be empty")
-    @ValidPassword
+    //@ValidPassword
     private String password;
 
     @NotNull(message = "Select a role")
     @Enumerated(EnumType.STRING)
-    private AccountType accountType;
+    private AccountTypeEnum accountType;
 
     public User(){
 
     }
 
-    public User(String ftname, String ltname, String email, String phonenumber, String affiliation, String password, AccountType accountType) {
+    public User(String ftname, String ltname, String email, String phonenumber, String affiliation, String password, AccountTypeEnum accountType) {
         this.ftname = ftname;
         this.ltname = ltname;
         this.email = email;
@@ -90,7 +90,7 @@ public class User {
     }
 
 
-    public AccountType getAccountType() {
+    public AccountTypeEnum getAccountType() {
         return accountType;
     }
 
@@ -123,8 +123,12 @@ public class User {
         this.password = password;
     }
 
-    public void setAccountType(AccountType accountType) {
+    public void setAccountType(AccountTypeEnum accountType) {
         this.accountType = accountType;
+    }
+
+    public boolean auth(String password){
+        return this.password.equals(password);
     }
 }
 
