@@ -37,7 +37,7 @@ public class LoginController {
             String accotype = loginSer.getAccountType(email);
             System.out.print(accotype);
             if(accotype.equals(AccountTypeEnum.Chairman.toString())){
-                return "ReviewDeadlinesPCC";
+                return "redirect:/ReviewDeadlinesPCC";
             }
             else if(accotype.equals(AccountTypeEnum.Member)){
                 return "HomepagePCM";

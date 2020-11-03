@@ -19,9 +19,10 @@ public class MVCWebConfig implements WebMvcConfigurer{
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/").setViewName("registration.html");
+        registry.addViewController("/registration.html").setViewName("registration.html");
+        registry.addViewController("/login.html").setViewName("login.html");
         registry.addViewController("/").setViewName("login.html");
-        registry.addViewController("/").setViewName("AuthorResearchPaperDeadlines.html");
+        registry.addViewController("/AuthorResearchPaperDeadlines.html").setViewName("AuthorResearchPaperDeadlines.html");
     }
 
     @Bean
