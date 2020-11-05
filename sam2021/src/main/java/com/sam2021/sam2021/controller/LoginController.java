@@ -39,20 +39,20 @@ public class LoginController {
             if(accotype.equals(AccountTypeEnum.Chairman.toString())){
                 return "redirect:/ReviewDeadlinesPCC";
             }
-            else if(accotype.equals(AccountTypeEnum.Member)){
-                return "HomepagePCM";
+            else if(accotype.equals(AccountTypeEnum.Member.toString())){
+                return "redirect:/HomepagePCM";
             }
-            else if(accotype.equals(AccountTypeEnum.Author)){
-                return "AuthorResearchPaperDeadlines";
+            else if(accotype.equals(AccountTypeEnum.Author.toString())){
+                return "redirect:/AuthorResearchPaperDeadlines";
             }
             else if(accotype.equals("Admin")){
-                return "ManageUsersAdmin";
+                return "redirect:/ManageUsersAdmin";
             }
         }
         else{
             return "login";
         }
-        return null;
+        return "login";
         
     }
 }
