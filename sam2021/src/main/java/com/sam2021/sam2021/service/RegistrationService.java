@@ -21,14 +21,13 @@ public class RegistrationService {
     }
 
     public User save(User register){
-       
-        System.out.print(DigestUtils.md5Hex(register.getPassword()));
+    
         register.setEmail(register.getEmail());
         register.setAccountType(register.getAccountType());
         register.setAffiliation(register.getAffiliation());
         register.setFtname(register.getFtname());
         register.setLtname(register.getLtname());
-        register.setPassword(DigestUtils.md5Hex(register.getPassword()));
+        register.setPassword(register.getPassword());
         register.setPhonenumber(register.getPhonenumber());
         
         return userRepo.save(register);

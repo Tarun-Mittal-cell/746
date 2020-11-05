@@ -5,6 +5,8 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import org.apache.commons.codec.digest.DigestUtils;
+
 //import com.sam2021.sam2021.validation.ValidPassword;
 
 
@@ -25,6 +27,7 @@ public class User {
     private String ltname;
 
     @NotNull
+    @Column(unique = true)
     @Email(message = "Email can not be empty")
     @NotEmpty(message = "Email can not be empty")
     private String email;
@@ -129,6 +132,11 @@ public class User {
 
     public boolean auth(String password){
         return this.password.equals(password);
+    }
+
+    @PrePersist
+    public void prePersist(){
+        password = DigestUtils.md5Hex(password);
     }
 }
 
