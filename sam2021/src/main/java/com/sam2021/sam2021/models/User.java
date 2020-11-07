@@ -7,8 +7,6 @@ import javax.validation.constraints.NotNull;
 
 import org.apache.commons.codec.digest.DigestUtils;
 
-//import com.sam2021.sam2021.validation.ValidPassword;
-
 
 @Entity
 @Table(name="user")
@@ -42,7 +40,6 @@ public class User {
 
     @NotNull
     @NotEmpty(message = "Password can not be empty")
-    //@ValidPassword
     private String password;
 
     @NotNull(message = "Select a role")
