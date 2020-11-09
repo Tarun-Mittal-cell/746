@@ -1,7 +1,9 @@
 package com.sam2021.sam2021.models;
 
 import java.sql.Timestamp;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -9,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -33,17 +37,21 @@ public class Topic {
     @NotEmpty
     private Timestamp submission_deadline;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL )
     @JoinColumn(name = "chairman_id", nullable = false)
-    private User chairman;
+    private Set<User> chairman;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "members_id", nullable = false)
-    private User members;
+    private Set<User> members;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "papers_id", nullable = false)
-    private Paper papers;
+    private Set<Paper> papers;
+
+    @OneToOne(mappedBy = "topic", fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
+    private ReviewTemplate reviewTemp;
 
     public Topic(){
         
@@ -68,20 +76,24 @@ public class Topic {
         return description;
     }
 
-    public User getChairman() {
+    public Set<User> getChairman() {
         return chairman;
     }
 
-    public User getMembers() {
+    public Set<User> getMembers() {
         return members;
     }
 
-    public Paper getPapers() {
+    public Set<Paper> getPapers() {
         return papers;
     }
 
     public Timestamp getSubmission_deadline() {
         return submission_deadline;
+    }
+
+    public ReviewTemplate getReviewTemp() {
+        return reviewTemp;
     }
 
     //Setter
@@ -97,20 +109,24 @@ public class Topic {
         this.description = description;
     }
 
-    public void setChairman(User chairman) {
+    public void setChairman(Set<User> chairman) {
         this.chairman = chairman;
     }
 
-    public void setMembers(User members) {
+    public void setMembers(Set<User> members) {
         this.members = members;
     }
 
-    public void setPapers(Paper papers) {
+    public void setPapers(Set<Paper> papers) {
         this.papers = papers;
     }
 
     public void setSubmission_deadline(Timestamp submission_deadline) {
         this.submission_deadline = submission_deadline;
+    }
+
+    public void setReviewTemp(ReviewTemplate reviewTemp) {
+        this.reviewTemp = reviewTemp;
     }
 
 }

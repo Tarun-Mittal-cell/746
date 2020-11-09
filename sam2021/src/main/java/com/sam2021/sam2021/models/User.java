@@ -46,9 +46,15 @@ public class User {
     @Enumerated(EnumType.STRING)
     private AccountTypeEnum accountType;
 
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "topic_id", nullable = false)
+    private Topic topic;
+
+
     public User(){
 
     }
+    
 
     public User(String ftname, String ltname, String email, String phonenumber, String affiliation, String password, AccountTypeEnum accountType) {
         this.ftname = ftname;
@@ -94,6 +100,10 @@ public class User {
         return accountType;
     }
 
+    public Topic getTopic() {
+        return topic;
+    }
+
     //Setters
 
     public void setId(Long id) {
@@ -131,9 +141,17 @@ public class User {
         return this.password.equals(password);
     }
 
+    public void setTopic(Topic topic) {
+        this.topic = topic;
+    }
+
     @PrePersist
     public void prePersist(){
         password = DigestUtils.md5Hex(password);
     }
+
+    
+
+   
 }
 
