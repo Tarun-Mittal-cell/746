@@ -5,7 +5,9 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-//import com.sam2021.sam2021.validation.ValidPassword;
+import com.sam2021.sam2021.models.Enums.AccountTypeEnum;
+
+import org.apache.commons.codec.digest.DigestUtils;
 
 
 @Entity
@@ -25,6 +27,7 @@ public class User {
     private String ltname;
 
     @NotNull
+    @Column(unique = true)
     @Email(message = "Email can not be empty")
     @NotEmpty(message = "Email can not be empty")
     private String email;
@@ -39,16 +42,32 @@ public class User {
 
     @NotNull
     @NotEmpty(message = "Password can not be empty")
-    //@ValidPassword
     private String password;
 
     @NotNull(message = "Select a role")
     @Enumerated(EnumType.STRING)
     private AccountTypeEnum accountType;
 
+    @OneToOne(mappedBy = "contactAuthor" ,fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Paper paperauthor;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    private Paper paperReviewer;
+
+    @OneToOne(mappedBy = "chairman",fetch = FetchType.LAZY, optional = true)
+    private Topic assignedPCC;
+
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Review review;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private NotificationsTemplate nTemplate;
+
+
     public User(){
 
     }
+    
 
     public User(String ftname, String ltname, String email, String phonenumber, String affiliation, String password, AccountTypeEnum accountType) {
         this.ftname = ftname;
@@ -94,6 +113,7 @@ public class User {
         return accountType;
     }
 
+
     //Setters
 
     public void setId(Long id) {
@@ -130,5 +150,15 @@ public class User {
     public boolean auth(String password){
         return this.password.equals(password);
     }
+
+
+    @PrePersist
+    public void prePersist(){
+        password = DigestUtils.md5Hex(password);
+    }
+
+    
+
+   
 }
 

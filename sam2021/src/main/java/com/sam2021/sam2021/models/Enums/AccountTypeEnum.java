@@ -1,4 +1,4 @@
-package com.sam2021.sam2021.models;
+package com.sam2021.sam2021.models.Enums;
 
 public enum AccountTypeEnum{
     Chairman("Chairman"),

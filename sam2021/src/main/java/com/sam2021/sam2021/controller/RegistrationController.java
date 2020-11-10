@@ -31,7 +31,7 @@ public class RegistrationController {
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public String userRegistration(final @ModelAttribute("user") @Valid User user, BindingResult result){
+    public String userRegistration(@Valid @ModelAttribute("user") User user, BindingResult result){
         System.out.print(user.getFtname()+"\n");
         System.out.print(user.getLtname()+"\n");
         System.out.print(user.getEmail()+"\n");
@@ -46,7 +46,6 @@ public class RegistrationController {
         if(result.hasErrors()){
             return "registration";
         }
-        
         regservice.save(user);
         return "login";
     }
