@@ -37,21 +37,20 @@ public class Topic {
     @NotEmpty
     private Timestamp submission_deadline;
 
-    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL )
+    @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL )
     @JoinColumn(name = "chairman_id", nullable = false)
-    private Set<User> chairman;
+    private User chairman;
 
-    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    @JoinColumn(name = "members_id", nullable = false)
+    @OneToMany(mappedBy = "assignedPCMS",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private Set<User> members;
 
-    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    @JoinColumn(name = "papers_id", nullable = false)
+    @OneToMany(mappedBy = "topic", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private Set<Paper> papers;
 
-    @OneToOne(mappedBy = "topic", fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @JoinColumn(name = "reviewtemp_id", nullable = false)
     private ReviewTemplate reviewTemp;
+
 
     public Topic(){
         
@@ -76,7 +75,7 @@ public class Topic {
         return description;
     }
 
-    public Set<User> getChairman() {
+    public User getChairman() {
         return chairman;
     }
 
@@ -109,7 +108,7 @@ public class Topic {
         this.description = description;
     }
 
-    public void setChairman(Set<User> chairman) {
+    public void setChairman(User chairman) {
         this.chairman = chairman;
     }
 

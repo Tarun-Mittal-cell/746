@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -28,25 +29,34 @@ public class Paper {
     @NotEmpty
 	private String title;
 	
-	@OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL )
-    @JoinColumn(name = "author_id", nullable = false)
-    private User contactAuthor;
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "contactAuth_id", nullable = false)
+	private User contactAuthor;
 	
-	@OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    @JoinColumn(name = "authors", nullable = false)
-	private Set<String> authors;
+	@NotNull
+    @NotEmpty
+	private String contauthname;
+
+	@NotNull
+    @NotEmpty
+	private String contauthemail;
 	
-	@OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    @JoinColumn(name = "reviewer_ids", nullable = false)
+	@NotNull
+    @NotEmpty
+	private String authors;
+	
+	@OneToMany(mappedBy = "paperReviewer" ,fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private Set<User> reviewers;
 	
-	@OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    @JoinColumn(name = "review_ids", nullable = false)
+	@OneToMany(mappedBy = "review_user" , fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private Set<Review> reviews;
 	
 	@OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL )
     @JoinColumn(name = "report_id", nullable = false)
-    private Report report;
+	private Report report;
+	
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+    private Topic topic;
 	
 	@NotNull
     @NotEmpty
@@ -64,7 +74,7 @@ public class Paper {
 		
 	}
 	
-	public Paper(String title, User contactAuthor, Set<String> authors, Timestamp review_deadline, int revision, String format) {
+	public Paper(String title, User contactAuthor, String contauthname, String contauthemail, String authors, Timestamp review_deadline, int revision, String format) {
 		this.title = title;
 		this.contactAuthor = contactAuthor;
 		this.authors = authors;
@@ -95,11 +105,11 @@ public class Paper {
 		this.contactAuthor = contactAuthor;
 	}
 
-	public Set<String> getAuthors() {
+	public String getAuthors() {
 		return authors;
 	}
 
-	public void setAuthors(Set<String> authors) {
+	public void setAuthors(String authors) {
 		this.authors = authors;
 	}
 

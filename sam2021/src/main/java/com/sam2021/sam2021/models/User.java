@@ -46,9 +46,26 @@ public class User {
     @Enumerated(EnumType.STRING)
     private AccountTypeEnum accountType;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "topic_id", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
     private Topic topic;
+
+    @OneToOne(mappedBy = "contactAuthor" ,fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Paper paperauthor;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    private Paper paperReviewer;
+
+    @OneToOne(mappedBy = "chairman",fetch = FetchType.LAZY, optional = true)
+    private Topic assignedPCC;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    private Topic assignedPCMS;
+
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Review review;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private NotificationsTemplate nTemplate;
 
 
     public User(){

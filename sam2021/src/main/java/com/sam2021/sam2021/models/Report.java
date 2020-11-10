@@ -1,9 +1,13 @@
 package com.sam2021.sam2021.models;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -24,6 +28,13 @@ public class Report {
     @NotNull
     private int rating;
 
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Paper paper;
+
+    public Report(){
+
+    }
+
     public Report(String review, int rating) {
         this.review = review;
         this.rating = rating;
@@ -42,6 +53,10 @@ public class Report {
         return review;
     }
 
+    public Paper getPaper() {
+        return paper;
+    }
+
     //Setters
     public void setId(Long id) {
         this.id = id;
@@ -53,6 +68,10 @@ public class Report {
 
     public void setReview(String review) {
         this.review = review;
+    }
+
+    public void setPaper(Paper paper) {
+        this.paper = paper;
     }
 
     

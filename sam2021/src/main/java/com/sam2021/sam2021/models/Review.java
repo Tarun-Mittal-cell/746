@@ -23,12 +23,11 @@ public class Review {
     @NotNull
     private String pcmReview;
 
-    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "review_id", nullable = false)
     private User review_user;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "paper_id", nullable = false)
     private Paper paper;
 
     public Review() {

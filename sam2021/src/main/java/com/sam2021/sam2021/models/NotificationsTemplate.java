@@ -28,8 +28,7 @@ public class NotificationsTemplate {
 
     private String filename;
 
-    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    @JoinColumn(name = "interested_users", nullable = false)
+	@OneToMany( mappedBy = "nTemplate", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private Set<User> interested_users;
     
     public NotificationsTemplate(String templateName, String filename) {

@@ -27,7 +27,6 @@ public class ReviewTemplate {
 
 
     @OneToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "topic_id", nullable = false)
     private Topic topic;
 
     public ReviewTemplate(String templateName, String filename) {
