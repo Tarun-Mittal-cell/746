@@ -5,6 +5,8 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import com.sam2021.sam2021.models.Enums.AccountTypeEnum;
+
 import org.apache.commons.codec.digest.DigestUtils;
 
 
@@ -46,9 +48,6 @@ public class User {
     @Enumerated(EnumType.STRING)
     private AccountTypeEnum accountType;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = true)
-    private Topic topic;
-
     @OneToOne(mappedBy = "contactAuthor" ,fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Paper paperauthor;
 
@@ -57,9 +56,6 @@ public class User {
 
     @OneToOne(mappedBy = "chairman",fetch = FetchType.LAZY, optional = true)
     private Topic assignedPCC;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = true)
-    private Topic assignedPCMS;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Review review;
@@ -117,9 +113,6 @@ public class User {
         return accountType;
     }
 
-    public Topic getTopic() {
-        return topic;
-    }
 
     //Setters
 
@@ -158,9 +151,6 @@ public class User {
         return this.password.equals(password);
     }
 
-    public void setTopic(Topic topic) {
-        this.topic = topic;
-    }
 
     @PrePersist
     public void prePersist(){

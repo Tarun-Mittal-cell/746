@@ -1,6 +1,6 @@
 package com.sam2021.sam2021.controller;
 
-import com.sam2021.sam2021.models.AccountTypeEnum;
+import com.sam2021.sam2021.models.Enums.AccountTypeEnum;
 import com.sam2021.sam2021.service.LoginService;
 
 import org.apache.commons.codec.digest.DigestUtils;
@@ -36,7 +36,7 @@ public class LoginController {
             model.addAttribute("password", password);
             String accotype = loginSer.getAccountType(email);
             System.out.print(accotype);
-            if(accotype.equals(AccountTypeEnum.Chairman.toString())){
+            if(accotype.equals(AccountTypeEnum.Chairman.toString())) {
                 return "redirect:/ReviewDeadlinesPCC";
             }
             else if(accotype.equals(AccountTypeEnum.Member.toString())){

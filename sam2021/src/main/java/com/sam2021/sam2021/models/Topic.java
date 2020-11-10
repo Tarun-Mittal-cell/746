@@ -10,7 +10,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -40,9 +39,6 @@ public class Topic {
     @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL )
     @JoinColumn(name = "chairman_id", nullable = false)
     private User chairman;
-
-    @OneToMany(mappedBy = "assignedPCMS",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    private Set<User> members;
 
     @OneToMany(mappedBy = "topic", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private Set<Paper> papers;
@@ -79,10 +75,6 @@ public class Topic {
         return chairman;
     }
 
-    public Set<User> getMembers() {
-        return members;
-    }
-
     public Set<Paper> getPapers() {
         return papers;
     }
@@ -110,10 +102,6 @@ public class Topic {
 
     public void setChairman(User chairman) {
         this.chairman = chairman;
-    }
-
-    public void setMembers(Set<User> members) {
-        this.members = members;
     }
 
     public void setPapers(Set<Paper> papers) {
