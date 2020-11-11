@@ -60,10 +60,6 @@ public class Paper {
 	
 	@NotNull
     @NotEmpty
-    private Timestamp review_deadline;
-	
-	@NotNull
-    @NotEmpty
 	private int revision;
 	
 	@NotNull
@@ -74,11 +70,10 @@ public class Paper {
 		
 	}
 	
-	public Paper(String title, User contactAuthor, String contauthname, String contauthemail, String authors, Timestamp review_deadline, int revision, String format) {
+	public Paper(String title, User contactAuthor, String contauthname, String contauthemail, String authors, int revision, String format) {
 		this.title = title;
 		this.contactAuthor = contactAuthor;
 		this.authors = authors;
-		this.review_deadline = review_deadline;
 		this.revision = revision;
 		this.format = format;
 	}
@@ -135,14 +130,6 @@ public class Paper {
 
 	public void setReport(Report report) {
 		this.report = report;
-	}
-
-	public Timestamp getReview_deadline() {
-		return review_deadline;
-	}
-
-	public void setReview_deadline(Timestamp review_deadline) {
-		this.review_deadline = review_deadline;
 	}
 
 	public int getRevision() {

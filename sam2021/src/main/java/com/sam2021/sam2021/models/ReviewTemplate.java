@@ -19,18 +19,23 @@ public class ReviewTemplate {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotNull
-    @NotEmpty
-    private String templateName;
 
     private String filename;
 
 
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @OneToOne(mappedBy = "reviewTemp", fetch = FetchType.LAZY, optional = false)
     private Topic topic;
 
-    public ReviewTemplate(String templateName, String filename) {
-        this.templateName = templateName;
+    public ReviewTemplate(){
+        
+    }
+
+    public ReviewTemplate(String filename) {
+        this.filename = filename;
+    }
+
+    public ReviewTemplate(Long id, String filename) {
+        this.id = id;
         this.filename = filename;
     }
 
@@ -38,9 +43,6 @@ public class ReviewTemplate {
 
     public Long getId() {
         return id;
-    }
-    public String getTemplateName() {
-        return templateName;
     }
 
     public String getFilename() {
@@ -58,10 +60,6 @@ public class ReviewTemplate {
         this.id = id;
     }
 
-    public void setTemplateName(String templateName) {
-        this.templateName = templateName;
-    }
-
     public void setFilename(String filename) {
         this.filename = filename;
     }
@@ -69,5 +67,6 @@ public class ReviewTemplate {
     public void setTopic(Topic topic) {
         this.topic = topic;
     }
+
 
 }
