@@ -1,12 +1,9 @@
 package com.sam2021.sam2021.controller.Admin;
 
+import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 
-import javax.servlet.http.HttpServletRequest;
+import javax.servlet.ServletContext;
 
 import com.sam2021.sam2021.service.ReviewTemplateService;
 
@@ -23,6 +20,9 @@ public class CreateReviewController {
     @Autowired
     private ReviewTemplateService revservice;
 
+    @Autowired
+	ServletContext context;
+
 
     @RequestMapping(value="/CreateReview", method = RequestMethod.GET)
     public String displayCreateReviewPage(){
@@ -37,14 +37,14 @@ public class CreateReviewController {
         }
         try{
             revservice.save(file.getOriginalFilename());
-            String dir = "/ReviewTemplates/";
-            Files.copy(file.getInputStream(), Paths.get(dir+file.getOriginalFilename()), StandardCopyOption.REPLACE_EXISTING);
+            File destinationFile = new File(context.getRealPath("/WEB-INF/ReviewTemplates")+  File.separator + file.getOriginalFilename());
+            file.transferTo(destinationFile);
         }catch (IOException e) {
             e.printStackTrace();
         }
         
         
-        attributes.addFlashAttribute("message", "You successfully uploaded " + file + '!');
+        attributes.addFlashAttribute("message", "You successfully uploaded " + file.getOriginalFilename() + '!');
         
         
         return "redirect:/CreateReview";

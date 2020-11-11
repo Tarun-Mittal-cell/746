@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Registration</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div class= "container">
+		
+	<div class= "header">
+
+		<h2>Review Template</h2>
+
+	</div>
+
+	<div class="container">
+	<form th:action="@{/reviewtemplatedefault}" th:method ="post" th:object="${user}">
+
+
+    <div class="form-group">
+
+			<label for="ftname">First Name : </label>
+			<input type ="text" name="ftname" th:field="*{ftname}" class="form-control">
+			<p class="error-message" th:each="error : ${#fields.errors('ftname')}" th:text="${error}">Validation error</p>
+		</div>
+
+		<div class="form-group">
+
+			<label for="ltname">Last Name : </label>
+			<input type ="text" name="ltname" th:field="*{ltname}" class="form-control">
+			<p class="error-message" th:each="error : ${#fields.errors('ltname')}" th:text="${error}">Validation error</p>
+		</div>
+
+    <div class="form-group">
+
+			<label for="email">Email : </label>
+			<input type ="email" name="email" th:field="*{email}" class="form-control">
+			<p class="error-message" th:each="error : ${#fields.errors('email')}" th:text="${error}">Validation error</p>
+		</div>
+
+		    <div class="form-group">
+
+			<label for="phonenumber">Phone number : </label>
+			<input type ="phone number" name="phonenumber" th:field="*{phonenumber}" class="form-control">
+			<p class="error-message" th:each="error : ${#fields.errors('phonenumber')}" th:text="${error}">Validation error</p>
+		</div>
+
+		<div class="form-group">
+
+			<label for="affiliation">Affiliation : </label>
+			<input type ="affiliation" name="affiliation" th:field="*{affiliation}" class="form-control" >
+			<p class="error-message" th:each="error : ${#fields.errors('affiliation')}" th:text="${error}">Validation error</p>
+		</div>
+
+
+
+    	<div class="form-group">
+
+			<label for="password">Password : </label>
+			<input type ="password" name="password" th:field="*{password}"class="form-control" >
+			<p class="error-message" th:each="error : ${#fields.errors('password')}" th:text="${error}">Validation error</p>
+		</div>
+
+		<div class="form-group">
+			<label>Role</label>
+			<select th:field="*{accountType}" class="form-control">
+				<option value="">Select Role</option>
+				<option th:each="role : ${T(com.sam2021.sam2021.models.Enums.AccountTypeEnum).values()}" th:value="${role}" th:text="${role}"></option>
+			</select>
+			<p class="error-message" th:each="error : ${#fields.errors('accountType')}" th:text="${error}">Validation error</p>
+		</div>
+
+		<button class="btn btn-success" type = "submit" name ="reg_user"> Submit </button>
+
+		<p>Already a user?<a href="/login.html"><b>Log in</b></a></p>
+
+
+</form>
+</div>
+
+</div>
+	
+
+</body>
+</html>
