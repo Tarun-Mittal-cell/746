@@ -44,7 +44,7 @@ public class Topic {
     private Set<Paper> papers;
 
     @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    @JoinColumn(name = "reviewtemp_id", nullable = false)
+    @JoinColumn(name = "reviewtemp_id", nullable = true)
     private ReviewTemplate reviewTemp;
 
 

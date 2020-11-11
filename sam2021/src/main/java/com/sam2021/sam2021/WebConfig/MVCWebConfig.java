@@ -23,6 +23,10 @@ public class MVCWebConfig implements WebMvcConfigurer{
         registry.addViewController("/login.html").setViewName("login.html");
         registry.addViewController("/").setViewName("login.html");
         registry.addViewController("/AuthorResearchPaperDeadlines.html").setViewName("AuthorResearchPaperDeadlines.html");
+        registry.addViewController("/ManageUsersAdmin").setViewName("ManageUsersAdmin.html");
+        registry.addViewController("/CreateReview").setViewName("CreateReview.html");
+        registry.addViewController("/CreateNotificationTemplateAdmin").setViewName("CreateNotificationTemplateAdmin.html");
+        registry.addViewController("/CreateDeadline").setViewName("CreateDeadline.html");
     }
 
     @Bean
