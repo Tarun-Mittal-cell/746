@@ -45,43 +45,29 @@
     </nav>
 
     <div class="container">
+      <form method = "POST"  th:action="@{/ManageUsersAdmin}"></form>
         <div class="row">
           <div class="col-sm mx-auto text-center" style="width: 100px; padding: 10px;">
             <h1 class="display-4" style="font-size: 40px;">Manage Users</h1>
-            <input class="form-control" type="text" placeholder="Search" aria-label="Search">
-            <button type="button" class="btn btn-primary" style="margin:2px">Search</button><button type="button" class="btn btn-primary" style="margin:2px" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Create New User</button>
+            <input th:value="${search}" name="search" class="form-control" type="text" placeholder="Search" aria-label="Search">
+            <button type="button" class="btn btn-primary" style="margin:2px">Search</button><button type="button" class="btn btn-primary" style="margin:2px" data-toggle="modal" data-target="#createUser" data-whatever="@mdo">Create New User</button>
             <div class="container-fluid rounded" style="height:500px; border:2px solid #cecece; padding: 1px;">
                 <table class="table" style="text-align: center;">
                     <thead>
                       <tr>
                         <th scope="col">#</th>
-                        <th scope="col" style="text-align: center;">Name</th>
+                        <th scope="col" style="text-align: center;">Email</th>
                         <th scope="col" style="text-align: center;">Role</th>
                         <th scope="col" style="text-align: center;">Edit</th>
                         <th scope="col" style="text-align: center;">Delete</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <th scope="row">1</th>
-                        <td style="text-align: center;">Mark</td>
-                        <td style="text-align: center;">PCM</td>
-                        <td><button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal">Edit</button></td>
+                      <tr th:each="user : ${users}">
+                        <td th:text="${user.email}"></td>
+                        <td th:text="${user.accountType}"></td>
+                        <td><button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#editModal">Edit</button></td>
                         <td><button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#deleteModal">Delete</button></td>
-                      </tr>
-                      <tr>
-                        <th scope="row">2</th>
-                        <td style="text-align: center;">Jacob</td>
-                        <td style="text-align: center;">Author</td>
-                        <td><button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal">Edit</button></td>
-                        <td><button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal">Delete</button></td>
-                      </tr>
-                      <tr>
-                        <th scope="row">3</th>
-                        <td style="text-align: center;">Larry</td>
-                        <td style="text-align: center;">PCC</td>
-                        <td><button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal">Edit</button></td>
-                        <td><button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal">Delete</button></td>
                       </tr>
                     </tbody>
                   </table>
@@ -90,11 +76,54 @@
           </div>
         </div>
       </div>
-      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <!-- Create for a user -->
+      <div class="modal fade" id="createUser" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h2 class="modal-title" id="exampleModalLabel">Add or edit new user</h2>
+              <h2 class="modal-title" id="exampleModalLabel">Add User</h2>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form th:action="@{/ManageUsersAdmin/createUser}" th:method ="post" th:object="${user}">
+                <div class="form-group">
+                    <label for="ftname" class="col-form-label">First Name:</label>
+                    <input type="text" name="ftname" th:field="*{ftname}" class="form-control">
+                    <label for="ltname" class="col-form-label">Last Name:</label>
+                    <input  name="ltname" th:field="*{ltname}" type="text" class="form-control">
+                    <label for="email" class="col-form-label">Email:</label>
+                    <input type ="email" name="email" th:field="*{email}" class="form-control">
+                    <label for="phonenumber" class="col-form-label">Phone Number:</label>
+                    <input type ="phone number" name="phonenumber" th:field="*{phonenumber}" class="form-control">
+                    <label for="affiliation" class="col-form-label">Affiliation:</label>
+                    <input type ="affiliation" name="affiliation" th:field="*{affiliation}"  class="form-control" >
+                    <label for="password" class="col-form-label">Password:</label>
+                    <input type ="password" name="password" th:field="*{password}" class="form-control">
+                    <div class="form-group">
+                      <label for="sel1">Role</label>
+                      <select th:field="*{accountType}" class="form-control" id="sel1">
+                        <option value="">Select Role</option>
+                        <option th:each="role : ${T(com.sam2021.sam2021.models.Enums.AccountTypeEnum).values()}" th:value="${role}" th:text="${role}"></option>
+                      </select>
+                    </div>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Send message</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Edit for a user -->
+      <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h2 class="modal-title" id="exampleModalLabel">Edit User</h2>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -113,8 +142,6 @@
                     <label for="recipient-name" class="col-form-label">Affiliation:</label>
                     <input type="text" class="form-control" id="recipient-name">
                     <label for="recipient-name" class="col-form-label">Password:</label>
-                    <input type="text" class="form-control" id="recipient-name">
-                    <label for="recipient-name" class="col-form-label">Confirm Password:</label>
                     <input type="text" class="form-control" id="recipient-name">
                     <div class="form-group">
                         <label for="sel1">Select list:</label>

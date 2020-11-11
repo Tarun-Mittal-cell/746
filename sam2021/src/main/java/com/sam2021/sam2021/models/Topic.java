@@ -32,10 +32,6 @@ public class Topic {
     @NotEmpty
     private String description;
 
-    @NotNull
-    @NotEmpty
-    private Timestamp submission_deadline;
-
     @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL )
     @JoinColumn(name = "chairman_id", nullable = false)
     private User chairman;
@@ -47,15 +43,17 @@ public class Topic {
     @JoinColumn(name = "reviewtemp_id", nullable = true)
     private ReviewTemplate reviewTemp;
 
+    @OneToOne(mappedBy = "topic", fetch = FetchType.LAZY,cascade = CascadeType.ALL )
+	private Deadlines deadlines;
+
 
     public Topic(){
         
     }
 
-    public Topic(String name, String description,Timestamp submission_deadline) {
+    public Topic(String name, String description) {
         this.name = name;
         this.description = description;
-        this.submission_deadline = submission_deadline;
     }
 
     //Getters
@@ -79,9 +77,6 @@ public class Topic {
         return papers;
     }
 
-    public Timestamp getSubmission_deadline() {
-        return submission_deadline;
-    }
 
     public ReviewTemplate getReviewTemp() {
         return reviewTemp;
@@ -106,10 +101,6 @@ public class Topic {
 
     public void setPapers(Set<Paper> papers) {
         this.papers = papers;
-    }
-
-    public void setSubmission_deadline(Timestamp submission_deadline) {
-        this.submission_deadline = submission_deadline;
     }
 
     public void setReviewTemp(ReviewTemplate reviewTemp) {
