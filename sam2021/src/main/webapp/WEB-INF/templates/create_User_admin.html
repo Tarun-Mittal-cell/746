@@ -1,0 +1,48 @@
+<div class="modal fade" id="createUser" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <form th:action="@{/ManageUsersAdmin/create}" th:method ="POST" th:object="${user}">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 class="modal-title" id="exampleModalLabel">Add User</h2>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+              <div class="form-group">
+                  <label for="ftname" class="col-form-label">First Name:</label>
+                  <input type="text" name="ftname" th:field="*{ftname}" class="form-control">
+                  <p class="error-message" th:each="error : ${#fields.errors('ftname')}" th:text="${error}">Validation error</p>
+                  <label for="ltname" class="col-form-label">Last Name:</label>
+                  <input  name="ltname" th:field="*{ltname}" type="text" class="form-control">
+                  <p class="error-message" th:each="error : ${#fields.errors('ltname')}" th:text="${error}">Validation error</p>
+                  <label for="email" class="col-form-label">Email:</label>
+                  <input type ="email" name="email" th:field="*{email}" class="form-control">
+                  <p class="error-message" th:each="error : ${#fields.errors('email')}" th:text="${error}">Validation error</p>
+                  <label for="phonenumber" class="col-form-label">Phone Number:</label>
+                  <input type ="phone number" name="phonenumber" th:field="*{phonenumber}" class="form-control">
+                  <p class="error-message" th:each="error : ${#fields.errors('phonenumber')}" th:text="${error}">Validation error</p>
+                  <label for="affiliation" class="col-form-label">Affiliation:</label>
+                  <input type ="affiliation" name="affiliation" th:field="*{affiliation}"  class="form-control" >
+                  <p class="error-message" th:each="error : ${#fields.errors('affiliation')}" th:text="${error}">Validation error</p>
+                  <label for="password" class="col-form-label">Password:</label>
+                  <input type ="password" name="password" th:field="*{password}" class="form-control">
+                  <p class="error-message" th:each="error : ${#fields.errors('password')}" th:text="${error}">Validation error</p>
+                  <div class="form-group">
+                    <label for="sel1">Role</label>
+                    <select th:field="*{accountType}" class="form-control" id="sel1">
+                      <option value="">Select Role</option>
+                      <option th:each="role : ${T(com.sam2021.sam2021.models.Enums.AccountTypeEnum).values()}" th:value="${role}" th:text="${role}"></option>
+                    </select>
+                    <p class="error-message" th:each="error : ${#fields.errors('accountType')}" th:text="${error}">Validation error</p>
+                  </div>
+              </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" value="submit" class="btn btn-primary">Send message</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>

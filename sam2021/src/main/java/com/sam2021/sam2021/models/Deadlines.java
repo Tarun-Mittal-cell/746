@@ -1,6 +1,7 @@
 package com.sam2021.sam2021.models;
 
-import java.sql.Timestamp;
+import java.sql.Date;
+
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -22,35 +23,34 @@ public class Deadlines {
 	private Long id;
 	
 	@NotNull
-    @NotEmpty
-	private Timestamp paperSubmissionDeadline;
+	private Date paperSubmissionDeadline;
 	
 	@NotNull
-    @NotEmpty
-	private Timestamp reviewChoiceDeadline;
+	private Date reviewChoiceDeadline;
 	
 	@NotNull
-    @NotEmpty
-	private Timestamp reviewDeadline;
+	private Date reviewDeadline;
 
 	@NotNull
-    @NotEmpty
-    private Timestamp AuthorNotifyDeadline;
+    private Date AuthorNotifyDeadline;
     
     @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL )
     @JoinColumn(name = "paper_id", nullable = false)
 	private Topic topic;
 
-    public Deadlines(Timestamp paperSubmissionDeadline,Timestamp reviewChoiceDeadline, Timestamp reviewDeadline, Timestamp authorNotifyDeadline, Topic topic) {
+    public Deadlines() {
+    }
+    
+
+    public Deadlines(Date paperSubmissionDeadline,Date reviewChoiceDeadline, Date reviewDeadline, Date authorNotifyDeadline) {
         this.paperSubmissionDeadline = paperSubmissionDeadline;
         this.reviewChoiceDeadline = reviewChoiceDeadline;
         this.reviewDeadline = reviewDeadline;
-        AuthorNotifyDeadline = authorNotifyDeadline;
-        this.topic = topic;
+        this.AuthorNotifyDeadline = authorNotifyDeadline;
     }
 
     //Getters
-    public Timestamp getAuthorNotifyDeadline() {
+    public Date getAuthorNotifyDeadline() {
         return AuthorNotifyDeadline;
     }
 
@@ -58,15 +58,15 @@ public class Deadlines {
         return id;
     }
 
-    public Timestamp getPaperSubmissionDeadline() {
+    public Date getPaperSubmissionDeadline() {
         return paperSubmissionDeadline;
     }
 
-    public Timestamp getReviewChoiceDeadline() {
+    public Date getReviewChoiceDeadline() {
         return reviewChoiceDeadline;
     }
 
-    public Timestamp getReviewDeadline() {
+    public Date getReviewDeadline() {
         return reviewDeadline;
     }
     
@@ -75,7 +75,7 @@ public class Deadlines {
     }
 
     //Setters
-    public void setAuthorNotifyDeadline(Timestamp authorNotifyDeadline) {
+    public void setAuthorNotifyDeadline(Date authorNotifyDeadline) {
         AuthorNotifyDeadline = authorNotifyDeadline;
     }
     
@@ -83,19 +83,21 @@ public class Deadlines {
         this.id = id;
     }
 
-    public void setPaperSubmissionDeadline(Timestamp paperSubmissionDeadline) {
+    public void setPaperSubmissionDeadline(Date paperSubmissionDeadline) {
         this.paperSubmissionDeadline = paperSubmissionDeadline;
     }
 
-    public void setReviewChoiceDeadline(Timestamp reviewChoiceDeadline) {
+    public void setReviewChoiceDeadline(Date reviewChoiceDeadline) {
         this.reviewChoiceDeadline = reviewChoiceDeadline;
     }
 
-    public void setReviewDeadline(Timestamp reviewDeadline) {
+    public void setReviewDeadline(Date reviewDeadline) {
         this.reviewDeadline = reviewDeadline;
     }
     
     public void setTopic(Topic topic) {
         this.topic = topic;
     }
+
+   
 }

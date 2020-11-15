@@ -79,6 +79,17 @@ public class User {
         this.accountType = accountType;
     }
 
+    public User(Long id, String ftname, String ltname, String email, String phonenumber, String affiliation, String password, AccountTypeEnum accountType) {
+        this.id = id;
+        this.ftname = ftname;
+        this.ltname = ltname;
+        this.email = email;
+        this.phonenumber = phonenumber;
+        this.affiliation = affiliation;
+        this.password = password;
+        this.accountType = accountType;
+    }
+
     //Getters
 
     public Long getId() {

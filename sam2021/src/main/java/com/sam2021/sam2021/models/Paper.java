@@ -1,6 +1,5 @@
 package com.sam2021.sam2021.models;
 
-import java.sql.Timestamp;
 import java.util.Set;
 
 import javax.persistence.CascadeType;

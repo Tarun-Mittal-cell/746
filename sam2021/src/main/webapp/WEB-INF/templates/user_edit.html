@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Edit User</title>
+    </head>
+    <body>
+        <a th:href="@{/ManageUsersAdmin}">Back to Manage User</a>
+        <br/><br/>
+        <form th:action="@{/ManageUsersAdmin/update/{id}(id=${user.id})}" th:object="${user}" method="POST">
+            <table>
+                <tr>
+                    <td>First Name</td>
+                    <td>:</td>
+                    <td><input type="text" th:field="*{ftname}" /></td>              
+                </tr>
+                <tr>
+                    <td>Last Name</td>
+                    <td>:</td>
+                    <td><input type="text" th:field="*{ltname}" /></td>              
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td>:</td>
+                    <td><input type="text" th:field="*{email}" /></td>              
+                </tr>
+                <tr>
+                    <td>Phone Number</td>
+                    <td>:</td>
+                    <td><input type="text" th:field="*{phonenumber}" size="50" /></td>              
+                </tr>
+                <tr>
+                    <td>Affiliation</td>
+                    <td></td>
+                    <td><input type="text" th:field="*{affiliation}" size="50" /></td>              
+                </tr>
+                <tr>
+                    <td>Password</td>
+                    <td></td>
+                    <td><input type="text" th:field="*{password}" size="50" /></td>              
+                </tr>
+                <tr>
+                    <label>Role</label>
+			        <select th:field="*{accountType}" class="form-control">
+				        <option value="">Select Role</option>
+				        <option th:each="role : ${T(com.sam2021.sam2021.models.Enums.AccountTypeEnum).values()}" th:value="${role}" th:text="${role}" th:if="${role.name() != 'Admin'}"></option>
+			        </select>              
+                </tr>
+            </table>
+            <input text= "Submit" type="submit" th:value=Update>
+        </form>
+ 
+        <br/>
+        <!-- Check if errorMessage is not null and not empty -->       
+        <div th:if="${errorMessage}" th:utext="${errorMessage}" class="error">       
+    </body>
+</html>

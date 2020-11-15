@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -14,7 +14,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.8.1/js/bootstrap-select.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script>$('select').selectpicker();</script>
-    <title>Welcome Admin</title>
+    <title>Welcome Author</title>
   </head>
 
   <body>
@@ -26,16 +26,13 @@
         <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
           <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
             <li class="nav-item active">
-              <a class="nav-link" href="./ManageUsersAdmin">Manage Users</a>
+              <a class="nav-link">Create Deadlines</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="./CreateReview">Create Review Template</a>
+              <a class="nav-link">Create Notification</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="./CreateNotificationTemplateAdmin">Create Notification Template</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="./CreateDeadline">Create Deadline</a>
+              <a class="nav-link">Create Review</a>
             </li>
           </ul>
         </div>
@@ -44,44 +41,48 @@
     <div class="container">
       <div class="row">
         <div class="col-sm mx-auto text-center" style="width: 60px; padding: 10px;">
-          <h1 class="display-4" style="font-size: 45px;">Create Notification</h1>
+          <h1 class="display-4" style="font-size: 45px;">Create Deadline</h1>
           <div class="container-fluid rounded" style="height:450px; width:600px; border:2px solid #cecece; padding: 1px;">
             <div class="input-group" style="height: 100px; padding: 10px">
-              <div class="input-group-prepend">
-                <span class="input-group-text" style="font-size: medium;">Message</span>
-              </div>
-              <textarea class="form-control" style="font-size: medium; height: 100px" aria-label="With textarea"></textarea>
-              <div class="input-group-prepend" style="padding-top: 10px;">
-                <span class="input-group-text" style="font-size: medium;">Type</span>
-              </div>
-              <select class="form-control" id="sel1" style="font-size: medium;">
-                <option>Notification</option>
-                <option>Event</option>
-              </select>
-              <div class="input-group-prepend" style="padding-top: 10px;">
-                <span class="input-group-text" style="font-size: medium;">Trigger</span>
-              </div>
-              <select class="form-control" id="sel1" style="font-size: medium;">
-                <option>Start of Day</option>
-                <option>Start of Week</option>
-                <option>Weekdays</option>
-                <option>On action</option>
-                <option>on upload</option>
-                <option>Manual</option>
-              </select>
-              <div class="input-group-prepend" style="padding-top: 10px;">
-                <span class="input-group-text" style="font-size: medium;">Interested Users</span>
-              </div>
-              <select class="form-control" id="sel1" style="font-size: medium;">
-                <option>PCM</option>
-                <option>PCC</option>
-                <option>Author</option>
-                <option>On action</option>
-                <option>on upload</option>
-                <option>Manual</option>
-              </select>
+                <form>
+                    <div class="form-group" style="font-size: medium;">
+                      <label>Name</label>
+                      <input class="form-control" type="text" placeholder="Enter Name">
+                    </div>
+                    <div class="form-group" style="font-size: medium;">
+                        <label>Description</label>
+                        <input class="form-control" type="text" placeholder="Enter Description">
+                    </div>
+                    <div class="form-group" style="font-size: medium;">
+                        <label>Select PCC</label>
+                        <select class="form-control" id="sel1" style="font-size: medium;">
+                            <option>John</option>
+                            <option>Jack</option>
+                            <option>Tom Hardy</option>
+                            <option>Tom Hanks</option>
+                            <option>Matthew Mcconaughey</option>
+                            <option>Me</option>
+                        </select>            
+                    </div>
+
+                    <div class="form-group" style="font-size: medium;">
+                        <label>Deadline</label>
+                        <input type="date" name="bday" max="3000-12-31" 
+                               min="1000-01-01" class="form-control">
+                    </div>
+
+                    <div class="form-group" style="font-size: medium;">
+                        <label>Select Review Template</label>
+                        <select class="form-control" id="sel1" style="font-size: medium;">
+                            <option>IEEE Research Paper format</option>
+                            <option>NSE Research Paper format</option>
+                            <option>University Research Paper format</option>
+                        </select>            
+                    </div>
+                    <button type="button" class="btn btn-primary btn-lg" style="margin-top: 10px;">Submit</button>
+
+                </form>
             </div>
-            <button type="button" class="btn btn-primary btn-lg" style="padding-top: 10px;">Submit</button>
           </div>
         </div>
       </div>
