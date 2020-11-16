@@ -51,8 +51,8 @@ public class User {
     @Enumerated(EnumType.STRING)
     private AccountTypeEnum accountType;
 
-    @OneToOne(mappedBy = "contactAuthor" ,fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Paper paperauthor;
+    @OneToMany(mappedBy = "contactAuthor" ,fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<Paper> paperauthor;
 
     @ManyToMany(mappedBy = "users", fetch = FetchType.LAZY)
     private Set<Paper> papers = new HashSet<>();
@@ -60,8 +60,8 @@ public class User {
     @OneToMany(mappedBy = "chairman",fetch = FetchType.LAZY)
     private Set<Topic> assignedPCC;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Review review;
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<Review> review;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private NotificationsTemplate nTemplate;

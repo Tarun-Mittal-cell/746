@@ -32,7 +32,7 @@ public class Paper {
     @NotEmpty
 	private String title;
 	
-	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "contactAuth_id", nullable = false)
 	private User contactAuthor;
 	
