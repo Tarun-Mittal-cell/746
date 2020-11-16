@@ -1,6 +1,5 @@
 package com.sam2021.sam2021.models;
 
-import java.sql.Timestamp;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -33,7 +32,7 @@ public class Topic {
     private String description;
 
     @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL )
-    @JoinColumn(name = "chairman_id", nullable = false)
+    @JoinColumn(name = "chairman_id", nullable = true)
     private User chairman;
 
     @OneToMany(mappedBy = "topic", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
@@ -82,6 +81,10 @@ public class Topic {
         return reviewTemp;
     }
 
+    public Deadlines getDeadlines() {
+        return deadlines;
+    }
+
     //Setter
     public void setId(Long id) {
         this.id = id;
@@ -107,4 +110,7 @@ public class Topic {
         this.reviewTemp = reviewTemp;
     }
 
+    public void setDeadlines(Deadlines deadlines) {
+        this.deadlines = deadlines;
+    }
 }

@@ -10,7 +10,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
@@ -18,7 +17,6 @@ import javax.validation.constraints.NotNull;
 
 import com.sam2021.sam2021.models.Enums.NotificationTypeEnum;
 import com.sam2021.sam2021.models.Enums.TriggerEnum;
-import com.sam2021.sam2021.models.Enums.userinterestEnum;
 
 
 @Entity
