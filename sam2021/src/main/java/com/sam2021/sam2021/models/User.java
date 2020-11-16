@@ -1,5 +1,8 @@
 package com.sam2021.sam2021.models;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
@@ -51,8 +54,8 @@ public class User {
     @OneToOne(mappedBy = "contactAuthor" ,fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Paper paperauthor;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = true)
-    private Paper paperReviewer;
+    @ManyToMany(mappedBy = "users", fetch = FetchType.LAZY)
+    private Set<Paper> papers = new HashSet<>();
 
     @OneToOne(mappedBy = "chairman",fetch = FetchType.LAZY, optional = true)
     private Topic assignedPCC;

@@ -1,6 +1,7 @@
 package com.sam2021.sam2021.models;
 
 import java.sql.Timestamp;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -10,6 +11,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -45,8 +48,15 @@ public class Paper {
     @NotEmpty
 	private String authors;
 	
-	@OneToMany(mappedBy = "paperReviewer" ,fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    private Set<User> reviewers;
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+	@JoinTable(name = "paper_user",
+            joinColumns = {
+                    @JoinColumn(name = "paper_id", referencedColumnName = "id",
+                            nullable = false, updatable = false)},
+            inverseJoinColumns = {
+                    @JoinColumn(name = "user_id", referencedColumnName = "id",
+                            nullable = false, updatable = false)})
+	private Set<User> users = new HashSet<>();
 	
 	@OneToMany(mappedBy = "review_user" , fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private Set<Review> reviews;
@@ -109,11 +119,11 @@ public class Paper {
 	}
 
 	public Set<User> getReviewers() {
-		return reviewers;
+		return users;
 	}
 
 	public void setReviewers(Set<User> reviewers) {
-		this.reviewers = reviewers;
+		this.users = reviewers;
 	}
 
 	public Set<Review> getReviews() {
