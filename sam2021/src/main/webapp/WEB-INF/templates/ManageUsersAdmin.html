@@ -14,7 +14,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.8.1/js/bootstrap-select.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script>$('select').selectpicker();</script>
-    <title>Welcome Author</title>
+    <title>Welcome Admin</title>
   </head>
 
   <body>
@@ -43,142 +43,85 @@
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Logout</button>
         </form>
     </nav>
-
     <div class="container">
-      <form method = "POST"  th:action="@{/ManageUsersAdmin}"></form>
         <div class="row">
-          <div class="col-sm mx-auto text-center" style="width: 100px; padding: 10px;">
-            <h1 class="display-4" style="font-size: 40px;">Manage Users</h1>
-            <input th:value="${search}" name="search" class="form-control" type="text" placeholder="Search" aria-label="Search">
-            <button type="button" class="btn btn-primary" style="margin:2px">Search</button><button type="button" class="btn btn-primary" style="margin:2px" data-toggle="modal" data-target="#createUser" data-whatever="@mdo">Create New User</button>
-            <div class="container-fluid rounded" style="height:500px; border:2px solid #cecece; padding: 1px;">
-                <table class="table" style="text-align: center;">
-                    <thead>
-                      <tr>
-                        <th scope="col">#</th>
-                        <th scope="col" style="text-align: center;">Email</th>
-                        <th scope="col" style="text-align: center;">Role</th>
-                        <th scope="col" style="text-align: center;">Edit</th>
-                        <th scope="col" style="text-align: center;">Delete</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr th:each="user : ${users}">
-                        <td th:text="${user.email}"></td>
-                        <td th:text="${user.accountType}"></td>
-                        <td><button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#editModal">Edit</button></td>
-                        <td><button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#deleteModal">Delete</button></td>
-                      </tr>
-                    </tbody>
-                  </table>
-            </div>      
+            <div class="col-sm mx-auto text-center" style="width: 100px; padding: 10px;">
+              <h1 class="display-4" style="font-size: 40px;">Manage Users</h1>
+              <button id= "refresh" name="Refresh" type="button" class="btn btn-primary" style="margin:2px">Refresh</button><button type="button" class="btn btn-primary" style="margin:2px" data-toggle="modal" data-target="#createUser" data-whatever="@mdo">Create New User</button>
+              <div class="container-fluid rounded" style="height:500px; border:2px solid #cecece; padding: 1px;">
+                  <table class="table" style="text-align: center;">
+                      <thead>
+                        <tr>
+                          <th scope="col" style="text-align: center;">Email</th>
+                          <th scope="col" style="text-align: center;">Role</th>
+                          <th scope="col" style="text-align: center;">Edit</th>
+                          <th scope="col" style="text-align: center;">Delete</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr th:each="usert : ${users}">
+                          <td th:text="${usert.email}"></td>
+                          <td th:text="${usert.accountType}"></td>
+                          <td><a type="button" class="btn btn-secondary" th:href="@{/ManageUsersAdmin/edit/{id}(id=${usert.id})}">Edit</a></td>
+                          <td><a type="button" class="btn btn-secondary" th:href="@{/ManageUsersAdmin/delete/{id}(id=${usert.id})}">Delete</a></td>
+                        </tr>
+                      </tbody>
+                    </table>
+              </div>      
+              </div>
             </div>
-          </div>
         </div>
       </div>
       <!-- Create for a user -->
       <div class="modal fade" id="createUser" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h2 class="modal-title" id="exampleModalLabel">Add User</h2>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <form th:action="@{/ManageUsersAdmin/createUser}" th:method ="post" th:object="${user}">
-                <div class="form-group">
-                    <label for="ftname" class="col-form-label">First Name:</label>
-                    <input type="text" name="ftname" th:field="*{ftname}" class="form-control">
-                    <label for="ltname" class="col-form-label">Last Name:</label>
-                    <input  name="ltname" th:field="*{ltname}" type="text" class="form-control">
-                    <label for="email" class="col-form-label">Email:</label>
-                    <input type ="email" name="email" th:field="*{email}" class="form-control">
-                    <label for="phonenumber" class="col-form-label">Phone Number:</label>
-                    <input type ="phone number" name="phonenumber" th:field="*{phonenumber}" class="form-control">
-                    <label for="affiliation" class="col-form-label">Affiliation:</label>
-                    <input type ="affiliation" name="affiliation" th:field="*{affiliation}"  class="form-control" >
-                    <label for="password" class="col-form-label">Password:</label>
-                    <input type ="password" name="password" th:field="*{password}" class="form-control">
-                    <div class="form-group">
-                      <label for="sel1">Role</label>
-                      <select th:field="*{accountType}" class="form-control" id="sel1">
-                        <option value="">Select Role</option>
-                        <option th:each="role : ${T(com.sam2021.sam2021.models.Enums.AccountTypeEnum).values()}" th:value="${role}" th:text="${role}"></option>
-                      </select>
-                    </div>
-                </div>
-              </form>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Send message</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Edit for a user -->
-      <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h2 class="modal-title" id="exampleModalLabel">Edit User</h2>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <form>
-                <div class="form-group">
-                  <label for="recipient-name" class="col-form-label">First Name:</label>
-                  <input type="text" class="form-control" id="recipient-name">
-                    <label for="recipient-name" class="col-form-label">Last Name:</label>
-                    <input type="text" class="form-control" id="recipient-name">
-                    <label for="recipient-name" class="col-form-label">Email:</label>
-                    <input type="text" class="form-control" id="recipient-name">
-                    <label for="recipient-name" class="col-form-label">Phone Number:</label>
-                    <input type="text" class="form-control" id="recipient-name">
-                    <label for="recipient-name" class="col-form-label">Affiliation:</label>
-                    <input type="text" class="form-control" id="recipient-name">
-                    <label for="recipient-name" class="col-form-label">Password:</label>
-                    <input type="text" class="form-control" id="recipient-name">
-                    <div class="form-group">
-                        <label for="sel1">Select list:</label>
-                        <select class="form-control" id="sel1">
-                          <option>Author</option>
-                          <option>PCM</option>
-                          <option>PCC</option>
+        <form th:action="@{/ManageUsersAdmin/create}" th:method ="POST" th:object="${user}">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h2 class="modal-title" id="exampleModalLabel">Add User</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                  <div class="form-group">
+                      <label for="ftname" class="col-form-label">First Name:</label>
+                      <input type="text" name="ftname" th:field="*{ftname}" class="form-control">
+                      <p class="error-message" th:each="error : ${#fields.errors('ftname')}" th:text="${error}">Validation error</p>
+                      <label for="ltname" class="col-form-label">Last Name:</label>
+                      <input  name="ltname" th:field="*{ltname}" type="text" class="form-control">
+                      <p class="error-message" th:each="error : ${#fields.errors('ltname')}" th:text="${error}">Validation error</p>
+                      <label for="email" class="col-form-label">Email:</label>
+                      <input type ="email" name="email" th:field="*{email}" class="form-control">
+                      <p class="error-message" th:each="error : ${#fields.errors('email')}" th:text="${error}">Validation error</p>
+                      <label for="phonenumber" class="col-form-label">Phone Number:</label>
+                      <input type ="phone number" name="phonenumber" th:field="*{phonenumber}" class="form-control">
+                      <p class="error-message" th:each="error : ${#fields.errors('phonenumber')}" th:text="${error}">Validation error</p>
+                      <label for="affiliation" class="col-form-label">Affiliation:</label>
+                      <input type ="affiliation" name="affiliation" th:field="*{affiliation}"  class="form-control" >
+                      <p class="error-message" th:each="error : ${#fields.errors('affiliation')}" th:text="${error}">Validation error</p>
+                      <label for="password" class="col-form-label">Password:</label>
+                      <input type ="password" name="password" th:field="*{password}" class="form-control">
+                      <p class="error-message" th:each="error : ${#fields.errors('password')}" th:text="${error}">Validation error</p>
+                      <div class="form-group">
+                        <label for="sel1">Role</label>
+                        <select th:field="*{accountType}" class="form-control" id="sel1">
+                          <option value="">Select Role</option>
+                          <option th:each="role : ${T(com.sam2021.sam2021.models.Enums.AccountTypeEnum).values()}" th:value="${role}" th:text="${role}"></option>
                         </select>
+                        <p class="error-message" th:each="error : ${#fields.errors('accountType')}" th:text="${error}">Validation error</p>
                       </div>
-                </div>
-              </form>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Send message</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Delete the User</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              Are you sure you want to delete user?
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Delete</button>
+                  </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" value="submit" class="btn btn-primary">Send message</button>
+              </div>
             </div>
           </div>
-        </div>
+        </form>
       </div>
+      
+      <script>$(document).ready(function() { $("#refresh").click(function(){ location.reload(false); }); });</script>
     </body>
 </html>

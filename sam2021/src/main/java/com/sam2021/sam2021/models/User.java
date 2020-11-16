@@ -57,8 +57,8 @@ public class User {
     @ManyToMany(mappedBy = "users", fetch = FetchType.LAZY)
     private Set<Paper> papers = new HashSet<>();
 
-    @OneToOne(mappedBy = "chairman",fetch = FetchType.LAZY, optional = true)
-    private Topic assignedPCC;
+    @OneToMany(mappedBy = "chairman",fetch = FetchType.LAZY)
+    private Set<Topic> assignedPCC;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Review review;
@@ -73,6 +73,17 @@ public class User {
     
 
     public User(String ftname, String ltname, String email, String phonenumber, String affiliation, String password, AccountTypeEnum accountType) {
+        this.ftname = ftname;
+        this.ltname = ltname;
+        this.email = email;
+        this.phonenumber = phonenumber;
+        this.affiliation = affiliation;
+        this.password = password;
+        this.accountType = accountType;
+    }
+
+    public User(Long id, String ftname, String ltname, String email, String phonenumber, String affiliation, String password, AccountTypeEnum accountType) {
+        this.id = id;
         this.ftname = ftname;
         this.ltname = ltname;
         this.email = email;

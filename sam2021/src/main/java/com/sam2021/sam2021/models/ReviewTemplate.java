@@ -1,15 +1,16 @@
 package com.sam2021.sam2021.models;
 
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+
 
 @Entity
 @Table(name = "ReviewTemplate")
@@ -23,8 +24,8 @@ public class ReviewTemplate {
     private String filename;
 
 
-    @OneToOne(mappedBy = "reviewTemp", fetch = FetchType.LAZY, optional = false)
-    private Topic topic;
+    @OneToMany(mappedBy = "reviewTemp", fetch = FetchType.LAZY)
+    private Set<Topic> topic;
 
     public ReviewTemplate(){
         
@@ -50,7 +51,7 @@ public class ReviewTemplate {
     }
 
 
-    public Topic getTopic() {
+    public Set<Topic> getTopic() {
         return topic;
     }
 
@@ -64,7 +65,7 @@ public class ReviewTemplate {
         this.filename = filename;
     }
 
-    public void setTopic(Topic topic) {
+    public void setTopic(Set<Topic> topic) {
         this.topic = topic;
     }
 

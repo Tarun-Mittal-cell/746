@@ -45,44 +45,57 @@
       <div class="row">
         <div class="col-sm mx-auto text-center" style="width: 60px; padding: 10px;">
           <h1 class="display-4" style="font-size: 45px;">Create Deadline</h1>
-          <div class="container-fluid rounded" style="height:450px; width:600px; border:2px solid #cecece; padding: 1px;">
+          <div class="container-fluid rounded" style="height:600px; width:600px; border:2px solid #cecece; padding: 1px;">
             <div class="input-group" style="height: 100px; padding: 10px">
-                <form>
+                <p th:text="${message}" th:if="${message ne null}" class="alert alert-primary">
+                <form method = "post"  th:action="@{/CreateDeadline}" >
                     <div class="form-group" style="font-size: medium;">
-                      <label>Name</label>
-                      <input class="form-control" type="text" placeholder="Enter Name">
+                      <label>Title</label>
+                      <input type ="text" name="title" class="form-control" placeholder="Enter Name" >
                     </div>
                     <div class="form-group" style="font-size: medium;">
                         <label>Description</label>
-                        <input class="form-control" type="text" placeholder="Enter Description">
+                        <input class="form-control" name="Description" type="text"  placeholder="Enter Description">
                     </div>
                     <div class="form-group" style="font-size: medium;">
-                        <label>Select PCC</label>
-                        <select class="form-control" id="sel1" style="font-size: medium;">
-                            <option>John</option>
-                            <option>Jack</option>
-                            <option>Tom Hardy</option>
-                            <option>Tom Hanks</option>
-                            <option>Matthew Mcconaughey</option>
-                            <option>Me</option>
-                        </select>            
+                      <label for="sel1">Select Chairman(PCC)</label>
+                      <select name="chair" id="chair" class="form-control" style="font-size: medium;">
+                        <option value="">Select Chairman</option>
+                        <option th:each="chairman : ${chairmans}" th:value="${chairman.id}" th:text="${chairman.email}"></option>
+                      </select>
                     </div>
-
                     <div class="form-group" style="font-size: medium;">
-                        <label>Deadline</label>
-                        <input type="date" name="bday" max="3000-12-31" 
+                        <label>Paper Submission Deadline</label>
+                        <input type="date" name="PSD" th:field="*{Deadlines.paperSubmissionDeadline}" max="3000-12-31" 
                                min="1000-01-01" class="form-control">
+                               <p class="error-message" th:each="error : ${#fields.errors('Deadlines.paperSubmissionDeadline')}" >Date is empty</p>       
                     </div>
-
                     <div class="form-group" style="font-size: medium;">
-                        <label>Select Review Template</label>
-                        <select class="form-control" id="sel1" style="font-size: medium;">
-                            <option>IEEE Research Paper format</option>
-                            <option>NSE Research Paper format</option>
-                            <option>University Research Paper format</option>
-                        </select>            
+                      <label>Review Choice Deadline</label>
+                      <input type="date" name="RCD" th:field="*{Deadlines.reviewChoiceDeadline}" max="3000-12-31" 
+                             min="1000-01-01" class="form-control">
+                             <p class="error-message" th:each="error : ${#fields.errors('Deadlines.reviewChoiceDeadline')}" >Date is empty</p>
                     </div>
-                    <button type="button" class="btn btn-primary btn-lg" style="margin-top: 10px;">Submit</button>
+                    <div class="form-group" style="font-size: medium;">
+                      <label>Review Deadline</label>
+                      <input type="date" name="RD" th:field="*{Deadlines.reviewDeadline}" max="3000-12-31" 
+                           min="1000-01-01" class="form-control">
+                           <p class="error-message" th:each="error : ${#fields.errors('Deadlines.reviewDeadline')}" >Date is empty</p>
+                    </div>
+                    <div class="form-group" style="font-size: medium;">
+                    <label>Author Notification Deadline</label>
+                      <input type="date" name="AND" th:field="*{Deadlines.AuthorNotifyDeadline}" max="3000-12-31" 
+                         min="1000-01-01" class="form-control">
+                         <p class="error-message" th:each="error : ${#fields.errors('Deadlines.AuthorNotifyDeadline')}" >Date is empty</p>
+                    </div>
+                    <div class="form-group" style="font-size: medium;">
+                      <label for="sel1">Select Review Template</label>
+                      <select name="reviewtemp" id="reviewtemp" class="form-control" style="font-size: medium;">
+                        <option value="">Select Role</option>
+                        <option th:each="revT : ${ReviewTemps}" th:value="${revT.id}" th:text="${revT.filename}"></option>
+                      </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-lg" style="margin-top: 50px;">Submit</button>
 
                 </form>
             </div>
