@@ -23,7 +23,7 @@ public class ReviewChoiceController {
         User user = new User();
         model.addAttribute("user", user);
 
-        //model.addAttribute("topics", topicService.getTopics());
+        model.addAttribute("topics", topicService.getTopics());
 
         return "HomepagePCM";
     }

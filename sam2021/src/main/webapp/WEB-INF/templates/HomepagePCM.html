@@ -51,41 +51,10 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Spectroscopy : How can it be useful for Research?</td>
-                            <td>24|12|2020</td>
-                            <td><button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal">View Submissions</button></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Introduction to Neuroscience</td>
-                            <td>12|04|2021</td>
-                            <td><button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal">View Submissions</button></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td>Future of Artificial Intelligence </td>
-                            <td>01|09|2021</td>
-                            <td><button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal">View Submissions</button></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td>Computer Science & App Development</td>
-                            <td>01|09|2021</td>
-                            <td><button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal">View Submissions</button></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td>Artificial Intelligence & Machine Learning</td>
-                            <td>01|09|2021</td>
-                            <td><button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal">View Submissions</button></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td>Politics & Development</td>
-                            <td>01|09|2021</td>
-                            <td><button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal">View Submissions</button></td>
+                        <tr th:each="topict : ${topics}">
+                          <td th:text="${topict.name"></td>
+                          <td th:text="${topict.deadlines.reviewChoiceDeadline"></td>
+                          <td><button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal">View Submissions</button></td>
                         </tr>
                     </tbody>
                 </table>

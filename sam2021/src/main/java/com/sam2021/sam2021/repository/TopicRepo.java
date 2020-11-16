@@ -6,9 +6,11 @@ import java.util.Optional;
 import com.sam2021.sam2021.models.Topic;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 public interface TopicRepo extends JpaRepository<Topic, Long> {
 
-
+    @Query("FROM Topic")
+    List<Topic> getAll();
 }
