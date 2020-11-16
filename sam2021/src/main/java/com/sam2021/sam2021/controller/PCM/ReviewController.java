@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-public class MemberController {
+public class ReviewController {
     @RequestMapping(value="/HomepagePCM", method = RequestMethod.GET)
     public String displayHomepage(){
         return "HomepagePCM";
