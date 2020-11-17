@@ -35,7 +35,7 @@ public class Deadlines {
     private Date AuthorNotifyDeadline;
     
     @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL )
-    @JoinColumn(name = "paper_id", nullable = false)
+    @JoinColumn(name = "topic_id", nullable = false)
 	private Topic topic;
 
     public Deadlines() {
