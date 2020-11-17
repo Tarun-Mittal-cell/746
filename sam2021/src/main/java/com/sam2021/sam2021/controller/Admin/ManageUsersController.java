@@ -1,11 +1,15 @@
 package com.sam2021.sam2021.controller.Admin;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
+import com.sam2021.sam2021.models.Topic;
 import com.sam2021.sam2021.models.User;
-
+import com.sam2021.sam2021.models.Enums.AccountTypeEnum;
+import com.sam2021.sam2021.repository.TopicRepo;
+import com.sam2021.sam2021.service.CreateTopicService;
 import com.sam2021.sam2021.service.ManageUserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +23,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 
@@ -28,6 +33,9 @@ public class ManageUsersController {
 
     @Autowired
     private ManageUserService manageruserser;
+
+    @Autowired
+    private CreateTopicService ctservice;
 
     /**
      * Loads Manage User page with all the users 
@@ -51,10 +59,14 @@ public class ManageUsersController {
      * @return
      */
     @GetMapping(value = "/ManageUsersAdmin/delete/{id}")
-    public String deleteUser(@PathVariable("id") long id, Model model) {
+    public String deleteUser(@PathVariable("id") long id, Model model, RedirectAttributes attributes) {
 
         User user = manageruserser.findbyId(id).orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
-        manageruserser.delete(user);
+        String message = manageruserser.delete(user);
+        if(message.equals("Chairman is current active with one of more Topics")){
+           attributes.addFlashAttribute("Message", message);
+        }
+        attributes.addFlashAttribute("Message", message);
         return "redirect:/ManageUsersAdmin";
     }
 
@@ -95,14 +107,20 @@ public class ManageUsersController {
 
     }
 
-    @RequestMapping(value={"/ManageUsersAdmin/create"}, method=RequestMethod.POST)
-    public String requestMethodName(@Valid @ModelAttribute("user") User user, BindingResult result, Model model) {
-        System.out.print(user.getEmail());
+    @RequestMapping(value={"/ManageUsersAdmin"}, method=RequestMethod.POST)
+    public String createUSer(RedirectAttributes attributes, @Valid @ModelAttribute("user") User user, BindingResult result, Model model) {
+        
         if(result.hasErrors()){
-            model.addAttribute("errorMessage", "Please re enter information");
+            model.addAttribute("Message", "Please re enter information");
+            return "ManageUsersAdmin";
+        }
+        User existing = manageruserser.findByEmail(user.getEmail());
+        if (existing != null) {
+            model.addAttribute("Message", "Email already has an account: " + existing.getEmail());
             return "ManageUsersAdmin";
         }
         manageruserser.save(user);
+        attributes.addFlashAttribute("Message", "Successfully created User account: " + user.getEmail());
         return "redirect:/ManageUsersAdmin";
     }
     

@@ -3,7 +3,12 @@ package com.sam2021.sam2021.service;
 import java.util.List;
 import java.util.Optional;
 
+
+import com.sam2021.sam2021.models.Topic;
 import com.sam2021.sam2021.models.User;
+import com.sam2021.sam2021.models.Enums.AccountTypeEnum;
+import com.sam2021.sam2021.repository.DeadlineRepo;
+import com.sam2021.sam2021.repository.TopicRepo;
 import com.sam2021.sam2021.repository.UserRepo;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +20,14 @@ public class ManageUserService {
     @Autowired
     private UserRepo userRepo;
 
+    @Autowired
+    private TopicRepo topicRepo;
+
+    @Autowired
+    private DeadlineRepo dRepo;
+
     public User findByEmail(String email){
         User user = userRepo.findByEmail(email);
-        System.out.print(user);
         return user;
     }
 
@@ -33,9 +43,24 @@ public class ManageUserService {
         userRepo.save(user);
     }
 
-    public void delete(User user){
-        userRepo.delete(user);
+    public String delete(User user){
+        if(user.getAccountType().equals(AccountTypeEnum.Chairman)) {
+            List<Topic> topic = topicRepo.findByChairman(user);
+            if(topic.isEmpty()){
+                userRepo.delete(user);
+                return "Delete successful";
+            }
+            else{
+                return "Chairman is current active with one of more Topics";
+            }
+        }
+        else if(user.getAccountType().equals(AccountTypeEnum.Member)){
+            userRepo.delete(user);
+        }
+        return "";
+
     }
+
 
     public User save(User register){
     

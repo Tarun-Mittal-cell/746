@@ -1,6 +1,7 @@
 package com.sam2021.sam2021.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.sam2021.sam2021.models.Deadlines;
 import com.sam2021.sam2021.models.ReviewTemplate;
@@ -15,7 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CreateDeadlineService{
+public class CreateTopicService {
 
     @Autowired
     private UserRepo userRepo;
@@ -26,10 +27,12 @@ public class CreateDeadlineService{
     @Autowired
     private TopicRepo tpRepo;
 
-    public void save(Topic t){   
-        // t.setDeadlines(d);
-        // d.setTopic(t);
-        tpRepo.save(t);
+    public void save(Topic topic, User chairman, ReviewTemplate reviewTemplate, Deadlines deadlines){   
+        topic.setChairman(chairman);
+        topic.setReviewTemp(reviewTemplate);
+        topic.setDeadlines(deadlines);
+        deadlines.setTopic(topic);
+        tpRepo.save(topic);
     }
 
     public List<User> getallchairman(){
@@ -40,5 +43,13 @@ public class CreateDeadlineService{
     public List<ReviewTemplate> getAllReviewTemplates(){
         List<ReviewTemplate> reviewTemplates = rTemplateRepo.findAll();
         return reviewTemplates;
+    }
+
+	public Optional<Topic> findbyId(Long id) {
+		return tpRepo.findById(id);
+    }
+    
+    public List<Topic> findByChairman(User chairman) {
+        return tpRepo.findByChairman(chairman);
     }
 }

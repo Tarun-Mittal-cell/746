@@ -45,7 +45,9 @@
     </nav>
     <div class="container">
         <div class="row">
-            <div class="col-sm mx-auto text-center" style="width: 100px; padding: 10px;">
+           
+            <div class="col-sm mx-auto text-center" style="width: 100px;">
+              <div th:text="${Message}" th:if="${Message}" class="alert alert-primary"></div>
               <h1 class="display-4" style="font-size: 40px;">Manage Users</h1>
               <button id= "refresh" name="Refresh" type="button" class="btn btn-primary" style="margin:2px">Refresh</button><button type="button" class="btn btn-primary" style="margin:2px" data-toggle="modal" data-target="#createUser" data-whatever="@mdo">Create New User</button>
               <div class="container-fluid rounded" style="height:500px; border:2px solid #cecece; padding: 1px;">
@@ -74,7 +76,7 @@
       </div>
       <!-- Create for a user -->
       <div class="modal fade" id="createUser" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <form th:action="@{/ManageUsersAdmin/create}" th:method ="POST" th:object="${user}">
+        <form th:action="@{/ManageUsersAdmin}" th:method ="POST" th:object="${user}">
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
@@ -121,7 +123,7 @@
           </div>
         </form>
       </div>
-      
+
       <script>$(document).ready(function() { $("#refresh").click(function(){ location.reload(false); }); });</script>
     </body>
 </html>
