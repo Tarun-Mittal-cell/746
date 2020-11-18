@@ -20,20 +20,13 @@
         <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
           <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
             <li class="nav-item active">
-              <a class="nav-link" href="./Homepage-PCM.html">Review Choice Deadlines</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="./Review Deadline - PCM.html">Review Deadline</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="./Research paper deadlines-PCM.html">Research Paper Deadlines</a>
+              <a class="nav-link" href="./ReviewDeadlinesPCC">Review Deadlines</a>
             </li>
           </ul>
-          <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-          </form>
         </div>
+        <form class="form-inline my-2 my-lg-0 bg-dark">
+          <button th:href="@{/logout}" class="btn btn-outline-success my-2 my-sm-0" type="submit">Logout</button>
+        </form>
     </nav>
   
     <div class="container">
@@ -44,41 +37,20 @@
             <table class="table">
               <thead class="thead-light">
                 <tr>
-                  <th scope="col">#</th>
                   <th scope="col">Research Paper Title</th>
-                  <th scope="col">Deadline</th>
+                  <th scope="col">Review Deadline</th>
+                  <th scope="col">Review Choice Deadline</th>
+                  <th scope="col">Assign Members</th>
+                  <th scope="col">Review</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Spectroscopy : How can it be useful for Research?</td>
-                    <td>24|12|2020</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Introduction to Neuroscience</td>
-                    <td>12|04|2021</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Future of Artificial Intelligence </td>
-                    <td>01|09|2021</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Computer Science & App Development</td>
-                    <td>01|09|2021</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Artificial Intelligence & Machine Learning</td>
-                    <td>01|09|2021</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Politics & Development</td>
-                    <td>01|09|2021</td>
+                <tr th:each="topic : ${topics}">
+                  <td th:text="${topic.name}"></td>
+                  <td th:text="${topic.Deadlines.reviewDeadline}"></td>
+                  <td th:text="${topic.Deadlines.reviewDeadline}"></td>
+                  <td><a type="button" class="btn btn-secondary" th:href="@{/AssignPaperPCC/{id}(id=${topic.id})}">Assign</a></td>
+                  <td><a type="button" class="btn btn-secondary">Report</a></td>
                 </tr>
               </tbody>
             </table>

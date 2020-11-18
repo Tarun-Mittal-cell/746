@@ -18,6 +18,9 @@ public interface UserRepo extends JpaRepository<User, Long> {
 
     @Query("FROM User WHERE account_type = 'Chairman'")
     List<User> getAllChairman();
+
+    @Query("FROM User WHERE account_type = 'Chairman' or account_type = 'Member'")
+    List<User> getChairandMeb();
     
     @Query("SELECT accountType FROM User WHERE email = ?1")
     String getEmailAccoutType(String email);
