@@ -45,7 +45,7 @@
                     <thead class="thead-light">
                         <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Research Paper Title</th>
+                        <th scope="col">Title</th>
                         <th scope="col">Deadline Date</th>
                         <th scope="col">Submissions</th>
                         </tr>
@@ -55,7 +55,7 @@
                           <td th:text="${topict.name}"></td>
                           <td th:text="${topict.deadlines.reviewChoiceDeadline}"></td>
                           <td>
-                            <a type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal" th:href="@{/homepagePCM/popup/{topicId}(topicId=${topict.id})}">View Submissions</a>
+                            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal">View Submissions</button>
                           </td>
                         </tr>
                     </tbody>
