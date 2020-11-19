@@ -20,7 +20,7 @@
       <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
           <li class="nav-item">
-            <a class="nav-link" href="/HomepagePCM/${user.id}">Review Choice Deadlines</a>
+            <a class="nav-link" th:href="@{/HomepagePCM/{id}(id=${user.id})}">Review Choice Deadlines</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/Review Deadline - PCM.html">Review Deadline</a>
@@ -53,8 +53,8 @@
                     <tbody>
                         <tr th:each="paperp : ${papers}">
                           <td th:text="${paperp.id}"></td>
-                          <td th:text="${paperp.name}"></td>
-                          <td th:text="${paperp.contauthname}"></td>
+                          <td th:text="${paperp.title}"></td>
+                          <td th:text="${paperp.contactAuthor.email}"></td>
                           <td>
                             <a type="button" class="btn btn-secondary" href="./ToggleInterested">View Submissions</a>
                           </td>

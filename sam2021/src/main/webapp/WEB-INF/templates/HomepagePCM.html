@@ -56,7 +56,7 @@
                           <td th:text="${topict.name}"></td>
                           <td th:text="${topict.deadlines.reviewChoiceDeadline}"></td>
                           <td>
-                            <a type="button" class="btn btn-secondary" href="/HomepagePCM/redirect/{topicId} (topicId=${topict.id})">View Submissions</a>
+                            <a type="button" class="btn btn-secondary" th:href="@{/HomepagePCM/redirect/{topicId}(topicId=${topict.id})}">View Submissions</a>
                           </td>
                         </tr>
                     </tbody>

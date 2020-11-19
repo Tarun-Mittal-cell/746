@@ -45,7 +45,7 @@ public class ReviewChoiceController {
         return "HomepagePCM";
     }
 
-    @RequestMapping(value = "/HomepagePCM/redirect/{topicId}", method = RequestMethod.GET)
+    @GetMapping(value = "/HomepagePCM/redirect/{topicId}")
     public String displaySelect(@PathVariable("topicId") long topicId, Model Model){
         return "redirect:/SelectInterested/"+user.getId()+"/"+topicId;
     }
