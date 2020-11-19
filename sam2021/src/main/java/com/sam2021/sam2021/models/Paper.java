@@ -66,7 +66,7 @@ public class Paper {
     private Set<Review> reviews;
 	
 	@OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL )
-    @JoinColumn(name = "report_id", nullable = false)
+    @JoinColumn(name = "report_id", nullable = true)
 	private Report report;
 	
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -197,6 +197,20 @@ public class Paper {
 
 	public void setAssigned(Boolean assigned) {
 		this.assigned = assigned;
+	}
+
+	public void setContauthemail(String contauthemail) {
+		this.contauthemail = contauthemail;
+	}
+
+	public void setContauthname(String contauthname) {
+		this.contauthname = contauthname;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public void setTopic(Topic topic) {
+		this.topic = topic;
 	}
 	
 }

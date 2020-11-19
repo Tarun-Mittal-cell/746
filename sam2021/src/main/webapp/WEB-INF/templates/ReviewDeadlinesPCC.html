@@ -48,7 +48,7 @@
                 <tr th:each="topic : ${topics}">
                   <td th:text="${topic.name}"></td>
                   <td th:text="${topic.Deadlines.reviewDeadline}"></td>
-                  <td th:text="${topic.Deadlines.reviewChoiceDeadline}"></td>
+                  <td th:text="${topic.Deadlines.reviewDeadline}"></td>
                   <td><a type="button" class="btn btn-secondary" th:href="@{/AssignPaperPCC/{id}(id=${topic.id})}">Assign</a></td>
                   <td><a type="button" class="btn btn-secondary">Report</a></td>
                 </tr>

@@ -26,91 +26,75 @@
         <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
           <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
             <li class="nav-item active">
-              <a class="nav-link" href="./ReviewDeadlinesPCC">Review Deadlines</a>
+              <a class="nav-link" href="/ReviewDeadlinesPCC">Review Deadlines</a>
             </li>
           </ul>
         </div>
     </nav>
-  
+    <form method="POST" action="/AssignPaperPCC" >
     <div class="container">
-      <div class="row">
-        <div class="col-sm mx-auto text-center" style="width: 100px; padding: 10px;">
-          <h1 class="display-4" style="font-size: 45px;">Assign Paper</h1>
-          <div class="container-fluid rounded" style="height:500px; border:2px solid #cecece; padding: 1px; overflow:scroll;">
-            <table class="table">
-              <thead class="thead-light">
-                <tr>
-                  <th scope="col">Research Paper Title</th>
-                  <th scope="col">Review Choice Deadline</th>
-                  <th scope="col">Interested Members</th>
-                  <th scope="col">Assign Paper</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr th:each="paper : ${papers}">
-                  <td th:text="${paper.title}"></td>
-                  <td th:text="${paper.Topic.Deadlines.reviewChoiceDeadline}"></td>
-                  <td>
-                    <select class="selectpicker" multiple data-live-search="true" name="member" id="member">
-                      <option th:each="member : ${paper.users}" th:value="${member.id}" th:text="${member.email}"></option>
-                    </select>
-                  </td>
-                  <td><button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal">Assign</button></td>
-                </tr>
-              </tbody>
-            </table>
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">Members</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    <div class="modal-body">
-                      <select class="selectpicker" multiple data-live-search="true" name="member" id="member">
-                        <option th:each="member : ${members}" th:value="${member.id}" th:text="${member.email}"></option>
+      
+        <div class="row">
+          <div class="col-sm mx-auto text-center" style="width: 100px; padding: 10px;">
+            <h1 class="display-4" style="font-size: 45px;">Assign Paper</h1>
+            <div class="container-fluid rounded" style="height:500px; border:2px solid #cecece; padding: 1px; overflow:scroll;">
+              <table class="table">
+                <thead class="thead-light">
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Research Paper Title</th>
+                    <th scope="col">Review Choice Deadline</th>
+                    <th scope="col">Interested Members(Min=3 Max=3)</th>
+                    <th scope="col">Assign Paper</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr th:each="paper : ${papers}">
+                    <td th:text="${paper.id}"></td>
+                    <td th:text="${paper.title}"></td>
+                    <td th:text="${paper.Topic.Deadlines.reviewChoiceDeadline}"></td>
+                    <td>
+                      <select class="selectpicker" multiple data-live-search="true"th:field="${userlist.userlist}">
+                        <option th:each="member : ${paper.users}" th:value="${member.id}" th:text="${member.email}"></option>
                       </select>
-                    </div>
-                    <div class="modal-footer">
+                    </td>
+                    <td><input type="submit" value="Assign" class="btn btn-secondary"/></td>
+                  </tr>
+                </tbody>
+              </table>
+              
+              <div class="modal fade" id="reviewModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Review</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <form>
+                          <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Reviewer:</label>
+                            <input type="text" class="form-control" id="recipient-name">
+                          </div>
+                          <div class="form-group">
+                            <label for="message-text" class="col-form-label">Message:</label>
+                            <textarea class="form-control" id="message-text">Needs more work. Details for the same are as mentioned.</textarea>
+                          </div>
+                        </form>
+                      </div>
+                      <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
+                        <button type="button" class="btn btn-primary">Save review</button>
+                      </div>
                     </div>
                   </div>
-                </div>
+              </div>      
             </div>
-            <div class="modal fade" id="reviewModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">Review</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    <div class="modal-body">
-                      <form>
-                        <div class="form-group">
-                          <label for="recipient-name" class="col-form-label">Reviewer:</label>
-                          <input type="text" class="form-control" id="recipient-name">
-                        </div>
-                        <div class="form-group">
-                          <label for="message-text" class="col-form-label">Message:</label>
-                          <textarea class="form-control" id="message-text">Needs more work. Details for the same are as mentioned.</textarea>
-                        </div>
-                      </form>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                      <button type="button" class="btn btn-primary">Save review</button>
-                    </div>
-                  </div>
-                </div>
-            </div>      
           </div>
         </div>
-      </div>
-    </div>  
+       </div> 
+      </form>  
   </body>
 </html>
