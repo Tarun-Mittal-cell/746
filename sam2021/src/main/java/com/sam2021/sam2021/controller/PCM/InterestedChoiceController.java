@@ -43,12 +43,18 @@ public class InterestedChoiceController {
         papers = paperService.getByTopic(topicId);
         ipapers = new ArrayList<>();
 
+        List<Paper> ownPapers = new ArrayList<>();
+
         for(Paper p : papers){
-            if(p.getReviewers().contains(user)){
+            if(p.getContactAuthor() == user){
+                ownPapers.add(p);
+            }
+            else if(p.getReviewers().contains(user)){
                 ipapers.add(p);
             }
         }
         papers.removeAll(ipapers);
+        papers.removeAll(ownPapers);
 
         model.addAttribute("papers", papers);
         model.addAttribute("ipapers", ipapers);
