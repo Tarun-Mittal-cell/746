@@ -16,7 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CreateTopicService {
+public class TopicService {
 
     @Autowired
     private UserRepo userRepo;
@@ -25,14 +25,18 @@ public class CreateTopicService {
     private ReviewTemplateRepo rTemplateRepo;
 
     @Autowired
-    private TopicRepo tpRepo;
+    private TopicRepo topicRepo;
 
     public void save(Topic topic, User chairman, ReviewTemplate reviewTemplate, Deadlines deadlines){   
         topic.setChairman(chairman);
         topic.setReviewTemp(reviewTemplate);
         topic.setDeadlines(deadlines);
         deadlines.setTopic(topic);
-        tpRepo.save(topic);
+        topicRepo.save(topic);
+    }
+
+    public List<Topic> getTopics(){
+        return topicRepo.getAll();
     }
 
     public List<User> getallchairman(){
@@ -46,10 +50,12 @@ public class CreateTopicService {
     }
 
 	public Optional<Topic> findbyId(Long id) {
-		return tpRepo.findById(id);
+		return topicRepo.findById(id);
     }
     
     public List<Topic> findByChairman(User chairman) {
-        return tpRepo.findByChairman(chairman);
+        return topicRepo.findByChairman(chairman);
     }
+
+
 }

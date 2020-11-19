@@ -47,7 +47,7 @@ public class RegistrationController {
             return "registration";
         }
         regservice.save(user);
-        return "login";
+        return "redirect:/login";
     }
     
 

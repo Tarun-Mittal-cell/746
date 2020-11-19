@@ -75,4 +75,9 @@ public class ManageUserService {
         return userRepo.save(register);
         
     }
+
+	public List<User> getChairandMeb() {
+
+		return userRepo.getChairandMeb();
+	}
 }

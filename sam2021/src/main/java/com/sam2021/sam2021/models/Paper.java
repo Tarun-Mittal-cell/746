@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -19,6 +20,9 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+
+import org.hibernate.annotations.Type;
+import org.hibernate.id.Assigned;
 
 @Entity
 @Table(name="Paper")
@@ -62,7 +66,7 @@ public class Paper {
     private Set<Review> reviews;
 	
 	@OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL )
-    @JoinColumn(name = "report_id", nullable = false)
+    @JoinColumn(name = "report_id", nullable = true)
 	private Report report;
 	
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -75,6 +79,10 @@ public class Paper {
 	@NotNull
     @NotEmpty
 	private String format;
+
+	@Type(type = "true_false")
+	@Column(columnDefinition = "char(1) default false")
+	private boolean assigned;
 	
 	public Paper() {
 		
@@ -86,6 +94,14 @@ public class Paper {
 		this.authors = authors;
 		this.revision = revision;
 		this.format = format;
+	}
+	public Paper(String title, User contactAuthor, String contauthname, String contauthemail, String authors, int revision, String format, boolean assigned) {
+		this.title = title;
+		this.contactAuthor = contactAuthor;
+		this.authors = authors;
+		this.revision = revision;
+		this.format = format;
+		this.assigned = assigned;
 	}
 
 	
@@ -113,6 +129,27 @@ public class Paper {
 	public String getAuthors() {
 		return authors;
 	}
+
+	public Boolean getAssigned() {
+		return assigned;
+	}
+
+	public String getContauthemail() {
+		return contauthemail;
+	}
+	public String getContauthname() {
+		return contauthname;
+	}
+
+	public Topic getTopic() {
+		return topic;
+	}
+	public Set<User> getUsers() {
+		return users;
+	}
+
+
+	//Setter
 
 	public void setAuthors(String authors) {
 		this.authors = authors;
@@ -156,6 +193,24 @@ public class Paper {
 
 	public void setFormat(String format) {
 		this.format = format;
+	}
+
+	public void setAssigned(Boolean assigned) {
+		this.assigned = assigned;
+	}
+
+	public void setContauthemail(String contauthemail) {
+		this.contauthemail = contauthemail;
+	}
+
+	public void setContauthname(String contauthname) {
+		this.contauthname = contauthname;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public void setTopic(Topic topic) {
+		this.topic = topic;
 	}
 	
 }
