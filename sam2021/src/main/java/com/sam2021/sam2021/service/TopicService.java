@@ -56,4 +56,6 @@ public class TopicService {
     public List<Topic> findByChairman(User chairman) {
         return topicRepo.findByChairman(chairman);
     }
+
+
 }

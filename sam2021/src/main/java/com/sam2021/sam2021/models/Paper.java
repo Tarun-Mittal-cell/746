@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -19,6 +20,9 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+
+import org.hibernate.annotations.Type;
+import org.hibernate.id.Assigned;
 
 @Entity
 @Table(name="Paper")
@@ -75,6 +79,10 @@ public class Paper {
 	@NotNull
     @NotEmpty
 	private String format;
+
+	@Type(type = "true_false")
+	@Column(columnDefinition = "char(1) default false")
+	private boolean assigned;
 	
 	public Paper() {
 		
@@ -86,6 +94,14 @@ public class Paper {
 		this.authors = authors;
 		this.revision = revision;
 		this.format = format;
+	}
+	public Paper(String title, User contactAuthor, String contauthname, String contauthemail, String authors, int revision, String format, boolean assigned) {
+		this.title = title;
+		this.contactAuthor = contactAuthor;
+		this.authors = authors;
+		this.revision = revision;
+		this.format = format;
+		this.assigned = assigned;
 	}
 
 	
@@ -113,6 +129,12 @@ public class Paper {
 	public String getAuthors() {
 		return authors;
 	}
+
+	public Boolean getAssigned() {
+		return assigned;
+	}
+
+	//Setter
 
 	public void setAuthors(String authors) {
 		this.authors = authors;
@@ -156,6 +178,10 @@ public class Paper {
 
 	public void setFormat(String format) {
 		this.format = format;
+	}
+
+	public void setAssigned(Boolean assigned) {
+		this.assigned = assigned;
 	}
 	
 }
