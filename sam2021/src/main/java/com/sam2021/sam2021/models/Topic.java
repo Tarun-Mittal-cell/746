@@ -36,7 +36,7 @@ public class Topic {
     @JoinColumn(name = "chairman_id", nullable = true)
     private User chairman;
 
-    @OneToMany(mappedBy = "papers", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "topic", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private Set<Paper> papers;
 
     @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
