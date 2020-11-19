@@ -1,7 +1,9 @@
 package com.sam2021.sam2021.controller;
 
+import com.sam2021.sam2021.models.User;
 import com.sam2021.sam2021.models.Enums.AccountTypeEnum;
 import com.sam2021.sam2021.service.LoginService;
+import com.sam2021.sam2021.service.ManageUserService;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,9 @@ public class LoginController {
 
     @Autowired
     private LoginService loginSer;
+
+    @Autowired
+    private ManageUserService userService;
 
     @RequestMapping(value="/login", method = RequestMethod.GET)
     public String displayLogin(Model model, String error){
@@ -40,7 +45,8 @@ public class LoginController {
                 return "redirect:/ReviewDeadlinesPCC";
             }
             else if(accotype.equals(AccountTypeEnum.Member.toString())){
-                return "redirect:/HomepagePCM";
+                User user = userService.findByEmail(email);
+                return "redirect:/HomepagePCM/"+user.getId();
             }
             else if(accotype.equals(AccountTypeEnum.Author.toString())){
                 return "redirect:/AuthorResearchPaperDeadlines";

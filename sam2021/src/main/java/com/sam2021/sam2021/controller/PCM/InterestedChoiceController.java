@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-public class ReviewChoiceController {
+public class InterestedChoiceController {
     @Autowired
     private PaperService paperService;
 
@@ -29,24 +29,14 @@ public class ReviewChoiceController {
     @Autowired
     private ManageUserService userService;
 
-    private List<Topic> topics = new ArrayList<>();
-    User user;
-
-    @RequestMapping(value="/HomepagePCM/{id}", method = RequestMethod.GET)
-    public String displayHomepage(@PathVariable("id") long id, Model model){
-        user = userService.findbyId(id).get();
+    @RequestMapping(value="/SelectInterested/{userId}/{topicId}", method = RequestMethod.GET)
+    public String displayHomepage(@PathVariable("userId") long userId, @PathVariable("topicId") long topicId, Model model){
+        User user = userService.findbyId(userId).get();
         model.addAttribute("user", user);
 
-        model.addAttribute("userId", id);
+        List<Paper> papers = paperService.getByTopic(topicId);
+        model.addAttribute("papers", papers);
 
-        topics = topicService.getTopics();
-        model.addAttribute("topics", topics);
-
-        return "HomepagePCM";
-    }
-
-    @RequestMapping(value = "/HomepagePCM/redirect/{topicId}", method = RequestMethod.GET)
-    public String displaySelect(@PathVariable("topicId") long topicId, Model Model){
-        return "redirect:/SelectInterested/"+user.getId()+"/"+topicId;
+        return "SelectInterested";
     }
 }

@@ -14,4 +14,7 @@ public interface PaperRepo extends JpaRepository<Topic, Long> {
 
     @Query("FROM Paper WHERE id=?1")
     Paper getById(long id);
+
+    @Query("FROM Paper WHERE topic_id=?1")
+    List<Paper> findByTopic(long id);
 }

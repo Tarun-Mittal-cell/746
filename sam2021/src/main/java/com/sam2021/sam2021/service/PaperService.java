@@ -1,5 +1,6 @@
 package com.sam2021.sam2021.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.sam2021.sam2021.models.Paper;
@@ -28,5 +29,9 @@ public class PaperService {
         else{
             paper.getReviewers().add(user.get());
         }
+    }
+
+    public List<Paper> getByTopic(long topicId){
+        return paperRepo.findByTopic(topicId);
     }
 }
