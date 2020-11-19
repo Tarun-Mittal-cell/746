@@ -52,9 +52,11 @@
                     </thead>
                     <tbody>
                         <tr th:each="topict : ${topics}">
-                          <td th:text="${topict.name"></td>
-                          <td th:text="${topict.deadlines.reviewChoiceDeadline"></td>
-                          <td><button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal">View Submissions</button></td>
+                          <td th:text="${topict.name}"></td>
+                          <td th:text="${topict.deadlines.reviewChoiceDeadline}"></td>
+                          <td>
+                            <a type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal" th:href="@{/homepagePCM/popup/{topicId}(topicId=${topict.id})}">View Submissions</a>
+                          </td>
                         </tr>
                     </tbody>
                 </table>
@@ -78,37 +80,11 @@
                                   </tr>
                                 </thead>
                                 <tbody>
-                                  <tr>
-                                    <th scope="row"  onclick="window.location='TheLinkGoesHere'">1</th>
-                                    <td onclick="window.location='TheLinkGoesHere'">Mark</td>
-                                    <td onclick="window.location='TheLinkGoesHere'">Otto</td>
+                                  <tr th:each="papert : ${papers}">
+                                    <td th:text="${papert.name}"></td>
+                                    <td th:text="${paperr.author}"></td>
                                     <td>  
-                                        <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                        <label class="form-check-label" for="exampleCheck1">Check this</label>
-                                        </div>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <th scope="row"  onclick="window.location='TheLinkGoesHere'">2</th>
-                                    <td  onclick="window.location='TheLinkGoesHere'">Jacob</td>
-                                    <td  onclick="window.location='TheLinkGoesHere'">Thornton</td>
-                                    <td>
-                                        <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                            <label class="form-check-label" for="exampleCheck1">Check this</label>
-                                        </div>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <th scope="row" onclick="window.location='TheLinkGoesHere'">3</th>
-                                    <td onclick="window.location='TheLinkGoesHere'">Larry</td>
-                                    <td onclick="window.location='TheLinkGoesHere'">the Bird</td>
-                                    <td>
-                                        <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                            <label class="form-check-label" for="exampleCheck1">Check this</label>
-                                        </div>
+                                      <a type="checkbox" class="form-check-input" id="chec${papert.name}" th:href="@{/homepagePCM/pref/{id}/{paperId}(id=${user.id}, paperId=${papert.id})}">
                                     </td>
                                   </tr>
                                 </tbody>

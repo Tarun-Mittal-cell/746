@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 public interface UserRepo extends JpaRepository<User, Long> {
     User findByEmail(String email);
 
+    @Query("FROM User WHERE id=?1")
     Optional<User> findById(Long id);
 
     @Query("FROM User WHERE account_type = 'Chairman'")
