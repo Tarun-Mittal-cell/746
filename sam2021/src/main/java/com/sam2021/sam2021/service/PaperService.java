@@ -21,13 +21,13 @@ public class PaperService {
     
     public void toggleInterested(long userId, long paperId){
         Paper paper = paperRepo.getById(paperId);
-        Optional<User> user = userRepo.findById(userId);
+        User user = userRepo.findById(userId).get();
 
-        if(paper.getReviewers().contains(user.get())){
-            paper.getReviewers().remove(user.get());
+        if(paper.getReviewers().contains(user)){
+            paper.getReviewers().remove(user);
         }
         else{
-            paper.getReviewers().add(user.get());
+            paper.getReviewers().add(user);
         }
 
         paperRepo.save(paper);
