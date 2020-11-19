@@ -42,6 +42,7 @@
                 <tr>
                   <th scope="col">Research Paper Title</th>
                   <th scope="col">Review Choice Deadline</th>
+                  <th scope="col">Interested Members</th>
                   <th scope="col">Assign Paper</th>
                 </tr>
               </thead>
@@ -49,6 +50,11 @@
                 <tr th:each="paper : ${papers}">
                   <td th:text="${paper.title}"></td>
                   <td th:text="${paper.Topic.Deadlines.reviewChoiceDeadline}"></td>
+                  <td>
+                    <select class="selectpicker" multiple data-live-search="true" name="member" id="member">
+                      <option th:each="member : ${paper.users}" th:value="${member.id}" th:text="${member.email}"></option>
+                    </select>
+                  </td>
                   <td><button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal">Assign</button></td>
                 </tr>
               </tbody>
@@ -57,14 +63,14 @@
                 <div class="modal-dialog">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">Submissions</h5>
+                      <h5 class="modal-title" id="exampleModalLabel">Members</h5>
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                       </button>
                     </div>
                     <div class="modal-body">
                       <select class="selectpicker" multiple data-live-search="true" name="member" id="member">
-                        <option th:each="member : ${members}" th:value="${member.id}" th:text="${chairman.email}"></option>
+                        <option th:each="member : ${members}" th:value="${member.id}" th:text="${member.email}"></option>
                       </select>
                     </div>
                     <div class="modal-footer">

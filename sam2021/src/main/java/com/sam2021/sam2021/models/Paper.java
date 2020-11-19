@@ -134,6 +134,21 @@ public class Paper {
 		return assigned;
 	}
 
+	public String getContauthemail() {
+		return contauthemail;
+	}
+	public String getContauthname() {
+		return contauthname;
+	}
+
+	public Topic getTopic() {
+		return topic;
+	}
+	public Set<User> getUsers() {
+		return users;
+	}
+
+
 	//Setter
 
 	public void setAuthors(String authors) {

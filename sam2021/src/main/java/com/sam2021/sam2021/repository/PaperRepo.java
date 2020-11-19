@@ -12,6 +12,7 @@ import org.springframework.data.jpa.repository.Query;
 public interface PaperRepo extends JpaRepository<Paper, Long> {
     Optional<Paper> findById(Long id);
 
-    @Query("FROM Paper JOIN Topic on Paper.topic_id = Topic.id where assigned = 'F'")
-    List<Paper> findByTopic();
+    @Query("SELECT a, b FROM Paper a JOIN a.topic b WHERE a.assigned = 'F' and b.id = ?1")
+    List<Paper> findByTopic(Long id);
+
 }

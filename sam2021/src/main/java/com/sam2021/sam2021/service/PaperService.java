@@ -17,10 +17,8 @@ public class PaperService {
     private PaperRepo paperRepo;
 
 
-    // public List<Paper> findbytopicFalse(Topic topic) {
-    //     List<Paper> papers = paperRepo.findByTopic(topic);
-    //     for
-    //     return 
-    // }
+    public List<Paper> findbytopicFalse(Long id) {
+        return paperRepo.findByTopic(id);
+    }
 
 }
