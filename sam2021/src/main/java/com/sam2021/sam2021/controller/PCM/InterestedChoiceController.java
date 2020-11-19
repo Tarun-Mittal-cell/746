@@ -29,14 +29,36 @@ public class InterestedChoiceController {
     @Autowired
     private ManageUserService userService;
 
+    private User user;
+    private List<Paper> papers;
+    private List<Paper> ipapers;
+    private long topicId;
+
     @RequestMapping(value="/SelectInterested/{userId}/{topicId}", method = RequestMethod.GET)
     public String displayHomepage(@PathVariable("userId") long userId, @PathVariable("topicId") long topicId, Model model){
-        User user = userService.findbyId(userId).get();
+        user = userService.findbyId(userId).get();
         model.addAttribute("user", user);
+        this.topicId = topicId;
 
-        List<Paper> papers = paperService.getByTopic(topicId);
+        papers = paperService.getByTopic(topicId);
+        ipapers = new ArrayList<>();
+
+        for(Paper p : papers){
+            if(p.getReviewers().contains(user)){
+                ipapers.add(p);
+            }
+        }
+        papers.removeAll(ipapers);
+
         model.addAttribute("papers", papers);
+        model.addAttribute("ipapers", ipapers);
 
         return "SelectInterested";
+    }
+
+    @GetMapping(value = "/SelectInterested/toggle/{paperId}")
+    public String toggleSelected(@PathVariable("paperId") long paperId, Model Model){
+        paperService.toggleInterested(user.getId(), paperId);
+        return "redirect:/SelectInterested/"+user.getId()+"/"+topicId;
     }
 }

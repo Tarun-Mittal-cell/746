@@ -29,6 +29,8 @@ public class PaperService {
         else{
             paper.getReviewers().add(user.get());
         }
+
+        paperRepo.save(paper);
     }
 
     public List<Paper> getByTopic(long topicId){

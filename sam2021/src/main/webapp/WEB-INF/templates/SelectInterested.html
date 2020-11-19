@@ -56,7 +56,7 @@
                           <td th:text="${paperp.title}"></td>
                           <td th:text="${paperp.contactAuthor.email}"></td>
                           <td>
-                            <a type="button" class="btn btn-secondary" href="./ToggleInterested">View Submissions</a>
+                            <a type="button" class="btn btn-secondary" th:href="@{/SelectInterested/toggle/{paperId} (paperId=${paperp.id})}">Add</a>
                           </td>
                         </tr>
                     </tbody>
@@ -64,6 +64,35 @@
             </div>
           </div>
         </div>
-      </div>  
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm mx-auto text-center" style="width: 100px; padding: 10px;">
+            <h1 class="display-4" style="font-size: 45px;">Interested Papers</h1>
+            <div class="container-fluid rounded" style="height:500px; border:2px solid #cecece; padding: 1px;">
+                <table class="table">
+                    <thead class="thead-light">
+                        <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Paper Title</th>
+                        <th scope="col">Submission By</th>
+                        <th scope="col">Interested?</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="paperp : ${ipapers}">
+                          <td th:text="${paperp.id}"></td>
+                          <td th:text="${paperp.title}"></td>
+                          <td th:text="${paperp.contactAuthor.email}"></td>
+                          <td>
+                            <a type="button" class="btn btn-secondary" th:href="@{/SelectInterested/toggle/{paperId} (paperId=${paperp.id})}">Remove</a>
+                          </td>
+                        </tr>
+                    </tbody>
+                </table>     
+            </div>
+          </div>
+        </div>
+      </div>   
     </body>
   </html>
