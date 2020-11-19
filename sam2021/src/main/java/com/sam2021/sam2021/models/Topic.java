@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -31,14 +32,14 @@ public class Topic {
     @NotEmpty
     private String description;
 
-    @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL )
+    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL )
     @JoinColumn(name = "chairman_id", nullable = true)
     private User chairman;
 
     @OneToMany(mappedBy = "topic", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private Set<Paper> papers;
 
-    @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "reviewtemp_id", nullable = true)
     private ReviewTemplate reviewTemp;
 

@@ -22,20 +22,20 @@ public class Deadlines {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
-	@NotNull
+	@NotNull(message = "Parameter Date Adjusted can not be blank or null")
 	private Date paperSubmissionDeadline;
 	
-	@NotNull
+	@NotNull(message = "Parameter Date Adjusted can not be blank or null")
 	private Date reviewChoiceDeadline;
 	
-	@NotNull
+	@NotNull(message = "Parameter Date Adjusted can not be blank or null")
 	private Date reviewDeadline;
 
-	@NotNull
+	@NotNull(message = "Parameter Date Adjusted can not be blank or null")
     private Date AuthorNotifyDeadline;
     
     @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL )
-    @JoinColumn(name = "paper_id", nullable = false)
+    @JoinColumn(name = "topic_id", nullable = false)
 	private Topic topic;
 
     public Deadlines() {

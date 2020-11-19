@@ -23,7 +23,7 @@ public class Review {
     @NotNull
     private String pcmReview;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "review_id", nullable = false)
     private User review_user;
 

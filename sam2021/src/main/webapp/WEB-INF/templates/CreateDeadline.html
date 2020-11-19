@@ -45,17 +45,17 @@
       <div class="row">
         <div class="col-sm mx-auto text-center" style="width: 60px; padding: 10px;">
           <h1 class="display-4" style="font-size: 45px;">Create Deadline</h1>
-          <div class="container-fluid rounded" style="height:520px; width:600px; border:2px solid #cecece; padding: 1px;">
+          <div class="container-fluid rounded" style="height:600px; width:600px; border:2px solid #cecece; padding: 1px;">
             <div class="input-group" style="height: 100px; padding: 10px">
-                <!-- <p th:text="${message}" th:if="${message ne null}" class="alert alert-primary"> -->
+                <p th:text="${message}" th:if="${message ne null}" class="alert alert-primary">
                 <form method = "post"  th:action="@{/CreateDeadline}" >
                     <div class="form-group" style="font-size: medium;">
                       <label>Title</label>
-                      <input type ="text" name="title" class="form-control" placeholder="Enter Name" >
+                      <input type ="text" name="title" th:field="*{Topic.name}" class="form-control" placeholder="Enter Name" >
                     </div>
                     <div class="form-group" style="font-size: medium;">
                         <label>Description</label>
-                        <input class="form-control" name="Description" type="text"  placeholder="Enter Description">
+                        <input class="form-control" name="Description"  th:field="*{Topic.description}" type="text"  placeholder="Enter Description">
                     </div>
                     <div class="form-group" style="font-size: medium;">
                       <label for="sel1">Select Chairman(PCC)</label>
@@ -68,21 +68,25 @@
                         <label>Paper Submission Deadline</label>
                         <input type="date" name="PSD" th:field="*{Deadlines.paperSubmissionDeadline}" max="3000-12-31" 
                                min="1000-01-01" class="form-control">
+                               <p class="error-message" th:each="error : ${#fields.errors('Deadlines.paperSubmissionDeadline')}" >Date is empty</p>       
                     </div>
                     <div class="form-group" style="font-size: medium;">
                       <label>Review Choice Deadline</label>
                       <input type="date" name="RCD" th:field="*{Deadlines.reviewChoiceDeadline}" max="3000-12-31" 
                              min="1000-01-01" class="form-control">
+                             <p class="error-message" th:each="error : ${#fields.errors('Deadlines.reviewChoiceDeadline')}" >Date is empty</p>
                     </div>
                     <div class="form-group" style="font-size: medium;">
                       <label>Review Deadline</label>
                       <input type="date" name="RD" th:field="*{Deadlines.reviewDeadline}" max="3000-12-31" 
                            min="1000-01-01" class="form-control">
+                           <p class="error-message" th:each="error : ${#fields.errors('Deadlines.reviewDeadline')}" >Date is empty</p>
                     </div>
                     <div class="form-group" style="font-size: medium;">
                     <label>Author Notification Deadline</label>
                       <input type="date" name="AND" th:field="*{Deadlines.AuthorNotifyDeadline}" max="3000-12-31" 
                          min="1000-01-01" class="form-control">
+                         <p class="error-message" th:each="error : ${#fields.errors('Deadlines.AuthorNotifyDeadline')}" >Date is empty</p>
                     </div>
                     <div class="form-group" style="font-size: medium;">
                       <label for="sel1">Select Review Template</label>
