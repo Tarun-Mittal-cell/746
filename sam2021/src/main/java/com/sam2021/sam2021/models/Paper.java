@@ -62,7 +62,7 @@ public class Paper {
     private Set<Review> reviews;
 	
 	@OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL )
-    @JoinColumn(name = "report_id", nullable = false)
+    @JoinColumn(name = "report_id", nullable = true)
 	private Report report;
 	
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
