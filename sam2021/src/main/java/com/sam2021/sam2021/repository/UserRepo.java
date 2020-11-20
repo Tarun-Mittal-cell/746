@@ -25,6 +25,9 @@ public interface UserRepo extends JpaRepository<User, Long> {
     @Query("SELECT accountType FROM User WHERE email = ?1")
     String getEmailAccoutType(String email);
 
+    @Query("SELECT id FROM User WHERE email = ?1")
+    Long getEmailid(String email);
+
     @Query("DELETE FROM User WHERE email = ?1")
     String deleteUserByEmail(String email);
 

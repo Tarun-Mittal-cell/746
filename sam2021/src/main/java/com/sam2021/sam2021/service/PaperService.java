@@ -25,6 +25,19 @@ public class PaperService {
         return paperRepo.findByTopic(id);
     }
 
+    public Paper findByFilename(String filename){
+        return paperRepo.findByFilename(filename);
+    }
+
+    public Paper save(Paper paper){
+        
+        return paperRepo.save(paper);
+        
+    }
+
+    public List<Paper> FindAllPapers(Long id){
+        return paperRepo.FindAllPapers(id);
+    }
     
 
 }

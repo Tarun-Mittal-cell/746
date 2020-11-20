@@ -36,6 +36,7 @@ public class LoginController {
             // attributes.addAttribute("email", email);
             // attributes.addAttribute("password", password);
             String accotype = loginSer.getAccountType(email);
+            Long id = loginSer.getid(email);
             System.out.print(accotype);
             if(accotype.equals(AccountTypeEnum.Chairman.toString())) {
                 return "redirect:/ReviewDeadlinesPCC";
@@ -44,7 +45,7 @@ public class LoginController {
                 return "redirect:/HomepagePCM";
             }
             else if(accotype.equals(AccountTypeEnum.Author.toString())){
-                return "redirect:/AuthorResearchPaperDeadlines";
+                return "redirect:/AuthorResearchPaperDeadlines/" + id ;
             }
             else if(accotype.equals("Admin")){
                 return "redirect:/ManageUsersAdmin";

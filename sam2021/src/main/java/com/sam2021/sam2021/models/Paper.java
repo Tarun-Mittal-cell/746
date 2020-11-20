@@ -39,10 +39,6 @@ public class Paper {
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "contactAuth_id", nullable = false)
 	private User contactAuthor;
-	
-	@NotNull
-    @NotEmpty
-	private String contauthname;
 
 	@NotNull
     @NotEmpty
@@ -56,10 +52,10 @@ public class Paper {
 	@JoinTable(name = "paper_user",
             joinColumns = {
                     @JoinColumn(name = "paper_id", referencedColumnName = "id",
-                            nullable = false, updatable = false)},
+                            nullable = true, updatable = false)},
             inverseJoinColumns = {
                     @JoinColumn(name = "user_id", referencedColumnName = "id",
-                            nullable = false, updatable = false)})
+                            nullable = true, updatable = false)})
 	private Set<User> users = new HashSet<>();
 	
 	@OneToMany(mappedBy = "review_user" , fetch = FetchType.LAZY,cascade = CascadeType.ALL)
@@ -74,7 +70,7 @@ public class Paper {
 	
 	@NotNull
     @NotEmpty
-	private int revision;
+	private String revision;
 	
 	@NotNull
     @NotEmpty
@@ -83,19 +79,23 @@ public class Paper {
 	@Type(type = "true_false")
 	@Column(columnDefinition = "char(1) default false")
 	private boolean assigned;
+
+	@NotNull
+    @NotEmpty
+	private String filename;
 	
 	public Paper() {
 		
 	}
 	
-	public Paper(String title, User contactAuthor, String contauthname, String contauthemail, String authors, int revision, String format) {
+	public Paper(String title, User contactAuthor, String contauthname, String contauthemail, String authors, String revision, String format, String filename) {
 		this.title = title;
 		this.contactAuthor = contactAuthor;
 		this.authors = authors;
 		this.revision = revision;
 		this.format = format;
 	}
-	public Paper(String title, User contactAuthor, String contauthname, String contauthemail, String authors, int revision, String format, boolean assigned) {
+	public Paper(String title, User contactAuthor, String contauthname, String contauthemail, String authors, String revision, String format, boolean assigned, String filename) {
 		this.title = title;
 		this.contactAuthor = contactAuthor;
 		this.authors = authors;
@@ -137,9 +137,7 @@ public class Paper {
 	public String getContauthemail() {
 		return contauthemail;
 	}
-	public String getContauthname() {
-		return contauthname;
-	}
+
 
 	public Topic getTopic() {
 		return topic;
@@ -147,6 +145,11 @@ public class Paper {
 	public Set<User> getUsers() {
 		return users;
 	}
+
+	public String getFilename() {
+		return filename;
+	}
+
 
 
 	//Setter
@@ -179,12 +182,12 @@ public class Paper {
 		this.report = report;
 	}
 
-	public int getRevision() {
+	public String getRevision() {
 		return revision;
 	}
 
-	public void setRevision(int revision) {
-		this.revision = revision;
+	public String setRevision(String revision) {
+		return this.revision = revision;
 	}
 
 	public String getFormat() {
@@ -202,15 +205,13 @@ public class Paper {
 	public void setContauthemail(String contauthemail) {
 		this.contauthemail = contauthemail;
 	}
-
-	public void setContauthname(String contauthname) {
-		this.contauthname = contauthname;
-	}
 	public void setId(Long id) {
 		this.id = id;
 	}
 	public void setTopic(Topic topic) {
 		this.topic = topic;
 	}
-	
+	public void setFilename(String filename) {
+		this.filename = filename;
+	}
 }
