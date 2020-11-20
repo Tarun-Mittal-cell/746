@@ -47,6 +47,10 @@ public class PaperService {
         return paperRepo.findByTopic(id);
     }
 
+    public List<Paper> findByTopic(Long id) {
+        return paperRepo.findAllByTopic(id);
+    }
+
     public Paper findByFilename(String filename){
         return paperRepo.findByFilename(filename);
     }

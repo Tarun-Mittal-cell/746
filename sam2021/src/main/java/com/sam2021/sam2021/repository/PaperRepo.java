@@ -17,6 +17,9 @@ public interface PaperRepo extends JpaRepository<Paper, Long> {
     @Query("SELECT a, b FROM Paper a JOIN a.topic b WHERE a.assigned = 'F' and b.id = ?1")
     List<Paper> findByTopic(Long id);
 
+    @Query("FROM Paper WHERE topic_id=?1")
+    List<Paper> findAllByTopic(long id);
+
     @Query("FROM Paper WHERE filename = ?1")
     Paper findByFilename(String filename);
 
