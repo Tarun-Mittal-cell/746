@@ -9,7 +9,7 @@ import com.sam2021.sam2021.models.Topic;
 import com.sam2021.sam2021.models.User;
 import com.sam2021.sam2021.models.Enums.AccountTypeEnum;
 import com.sam2021.sam2021.repository.TopicRepo;
-import com.sam2021.sam2021.service.CreateTopicService;
+import com.sam2021.sam2021.service.TopicService;
 import com.sam2021.sam2021.service.ManageUserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +35,7 @@ public class ManageUsersController {
     private ManageUserService manageruserser;
 
     @Autowired
-    private CreateTopicService ctservice;
+    private TopicService ctservice;
 
     /**
      * Loads Manage User page with all the users 
@@ -48,7 +48,9 @@ public class ManageUsersController {
         User user = new User();
         model.addAttribute("user", user);
 
-        model.addAttribute("users", manageruserser.getAllUsers());
+        List<User> users = manageruserser.getChairandMeb();
+
+        model.addAttribute("users", users );
         return "ManageUsersAdmin";
     }
 
@@ -122,6 +124,11 @@ public class ManageUsersController {
         manageruserser.save(user);
         attributes.addFlashAttribute("Message", "Successfully created User account: " + user.getEmail());
         return "redirect:/ManageUsersAdmin";
+    }
+
+    @RequestMapping(value="/logout", method = RequestMethod.GET)
+    public String logout(){
+        return "login";
     }
     
 }

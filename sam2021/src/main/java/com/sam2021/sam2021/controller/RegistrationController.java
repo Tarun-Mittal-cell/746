@@ -32,12 +32,6 @@ public class RegistrationController {
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public String userRegistration(@Valid @ModelAttribute("user") User user, BindingResult result){
-        System.out.print(user.getFtname()+"\n");
-        System.out.print(user.getLtname()+"\n");
-        System.out.print(user.getEmail()+"\n");
-        System.out.print(user.getPassword()+"\n");
-        System.out.print(user.getPhonenumber()+"\n");
-        System.out.print(user.getAccountType()+"\n");
         User existing = regservice.findByEmail(user.getEmail());
         if (existing != null) {
             result.rejectValue("email", null, "There is already an account registered with that email");
@@ -47,7 +41,7 @@ public class RegistrationController {
             return "registration";
         }
         regservice.save(user);
-        return "login";
+        return "redirect:/login";
     }
     
 
