@@ -14,4 +14,8 @@ public class ReviewService {
     public Review save(Review review){
         return reviewRepo.save(review);
     }
+
+    public Review findOwnReview(long userId, long paperId){
+        return reviewRepo.findOwnReview(userId, paperId);
+    }
 }

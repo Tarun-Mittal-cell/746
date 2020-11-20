@@ -62,25 +62,26 @@ public class PCMReviewController {
     public String displayReviewPage(@PathVariable("paperId") long paperId, Model model){
         Paper paper = paperService.findById(paperId);
         String reviewTemplateName = paper.getTopic().getReviewTemp().getFilename();
-        Set<Review> reviews = paper.getReviews();
 
+        Review review = reviewService.findOwnReview(user.getId(), paperId);
         ReviewContent reviewContent = new ReviewContent();
-        for(Review r : reviews){
-            if(r.getReview_user() == user){
-                reviewContent.setText(r.getPcmReview());
-            }
+        if(review.getReview_user() == user){
+            reviewContent.setText(review.getPcmReview());
+            model.addAttribute("reviewText", reviewContent);
         }
 
         model.addAttribute("reviewTemplate", reviewTemplateName);
         model.addAttribute("paper", paper);
-        model.addAttribute("reviewText", reviewContent);
 
         return "ReviewContainer";
     }
 
     @RequestMapping(value = "/PCMReview/SubmitReview/{paperId}", method = RequestMethod.POST)
     public String submitReview(@ModelAttribute("reviewText") ReviewContent reviewContent, @PathVariable("paperId") long paperId){
-        Review review = new Review(reviewContent.getText());
+        Review review = reviewService.findOwnReview(user.getId(), paperId);
+        if(review == null){
+            review = new Review(reviewContent.getText());
+        }
         review.setPaper(paperService.findById(paperId));
         review.setReview_user(userService.findbyId(user.getId()).get());
         reviewService.save(review);
