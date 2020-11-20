@@ -23,19 +23,24 @@ public class ReportController {
     @Autowired
     private PaperService pser;
 
+    private long paperid;
+
     @GetMapping(value = "/generatereport/{id}")
     public String displayReviewDeadlines(Model model, @PathVariable("id") long id){
-
+        paperid = id;
         Report report = new Report();
-        Paper paper = pser.findById(id);
-        report.setPaper(paper);
-        model.addAttribute("Report", report);
+        
+        model.addAttribute("report", report);
         return "generatereport";
     }
 
-    @RequestMapping(value = "/AssignPaperPCC/{topicid}/assign/{paperid}", method = RequestMethod.GET)
-    public String generatereport(Model model, @ModelAttribute Report report, @PathVariable("id") long id){
+    @RequestMapping(value = "/generatereport", method = RequestMethod.POST)
+    public String generatereport(Model model, @ModelAttribute Report report){
+        Paper paper = pser.findById(paperid);
+        report.setPaper(paper);
+        System.out.print(report.getRating());
+        System.out.print(report.getReview());
         rser.save(report);
-        return "redirect:/PCCReview/" + report.getPaper().getId();
+        return "redirect:/PCCReview/" + paper.getTopic().getId();
     }
 }

@@ -37,6 +37,7 @@ public class MVCWebConfig implements WebMvcConfigurer{
         //PCC
         registry.addViewController("/AssignPaperPCC").setViewName("AssignPaperPCC.html");
         registry.addViewController("/ReviewDeadlinesPCC").setViewName("ReviewDeadlinesPCC.html");
+        registry.addViewController("/generatereport").setViewName("generatereport.html");
     }
 
     @Bean

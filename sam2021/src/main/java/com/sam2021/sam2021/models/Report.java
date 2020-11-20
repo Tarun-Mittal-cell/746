@@ -23,7 +23,6 @@ public class Report {
     @NotNull
     private String review;
 
-    @NotEmpty
     @NotNull
     private int rating;
 
