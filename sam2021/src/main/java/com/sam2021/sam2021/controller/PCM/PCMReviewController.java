@@ -37,7 +37,7 @@ public class PCMReviewController {
     private User user;
 
     @RequestMapping(value = "/PCMReview/{userId}", method = RequestMethod.GET)
-    public String displayHomepage(@PathVariable("userId") long userId, Model model) {
+    public String displayPage(@PathVariable("userId") long userId, Model model) {
         user = userService.findbyId(userId).get();
 
         List<Paper> papers = paperService.findByReviewer(userId);
