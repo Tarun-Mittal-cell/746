@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 
@@ -34,12 +35,13 @@ public class LoginController {
     }
 
     @RequestMapping(value="/login", method = RequestMethod.POST)
-    public String login(@RequestParam(value = "email", required = true)String email,@RequestParam(value = "password", required = true)String password, Model model){
+    public String login(@RequestParam(value = "email", required = true)String email,@RequestParam(value = "password", required = true)String password, RedirectAttributes attributes){
         password = DigestUtils.md5Hex(password);
         if(loginSer.validateUser(email, password)){
-            model.addAttribute("email", email);
-            model.addAttribute("password", password);
+            // attributes.addAttribute("email", email);
+            // attributes.addAttribute("password", password);
             String accotype = loginSer.getAccountType(email);
+            Long id = loginSer.getid(email);
             System.out.print(accotype);
             if(accotype.equals(AccountTypeEnum.Chairman.toString())) {
                 return "redirect:/ReviewDeadlinesPCC";
@@ -49,7 +51,7 @@ public class LoginController {
                 return "redirect:/HomepagePCM/"+user.getId();
             }
             else if(accotype.equals(AccountTypeEnum.Author.toString())){
-                return "redirect:/AuthorResearchPaperDeadlines";
+                return "redirect:/AuthorResearchPaperDeadlines/" + id ;
             }
             else if(accotype.equals("Admin")){
                 return "redirect:/ManageUsersAdmin";

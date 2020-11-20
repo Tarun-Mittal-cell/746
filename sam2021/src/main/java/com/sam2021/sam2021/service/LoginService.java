@@ -26,4 +26,10 @@ public class LoginService {
 
         return accountype;
     }
+
+    public Long getid(String email){
+        Long id = userRepo.getEmailid(email);
+
+        return id;
+    }
 }

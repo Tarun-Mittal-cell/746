@@ -10,7 +10,7 @@ import com.sam2021.sam2021.models.Topic;
 import com.sam2021.sam2021.models.User;
 import com.sam2021.sam2021.repository.DeadlineRepo;
 import com.sam2021.sam2021.repository.TopicRepo;
-import com.sam2021.sam2021.service.CreateTopicService;
+import com.sam2021.sam2021.service.TopicService;
 import com.sam2021.sam2021.service.DeadlineService;
 import com.sam2021.sam2021.service.ManageUserService;
 
@@ -30,7 +30,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 public class CreateDeadlineController {
     @Autowired
-    private CreateTopicService cDeadlineService;
+    private TopicService cDeadlineService;
 
     @RequestMapping(value = "/CreateDeadline", method = RequestMethod.GET)
     public String displaycreatedeadline(Model model) {
