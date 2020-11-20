@@ -5,10 +5,12 @@ import java.util.List;
 import java.util.Set;
 
 import com.sam2021.sam2021.models.Paper;
+import com.sam2021.sam2021.models.Review;
 import com.sam2021.sam2021.models.Topic;
 import com.sam2021.sam2021.models.User;
 import com.sam2021.sam2021.service.ManageUserService;
 import com.sam2021.sam2021.service.PaperService;
+import com.sam2021.sam2021.service.ReviewService;
 import com.sam2021.sam2021.service.TopicService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +30,9 @@ public class PCMReviewController {
 
     @Autowired
     private PaperService paperService;
+
+    @Autowired
+    private ReviewService reviewService;
 
     private User user;
 
@@ -57,20 +62,34 @@ public class PCMReviewController {
     public String displayReviewPage(@PathVariable("paperId") long paperId, Model model){
         Paper paper = paperService.findById(paperId);
         String reviewTemplateName = paper.getTopic().getReviewTemp().getFilename();
+        Set<Review> reviews = paper.getReviews();
+
+        ReviewContent reviewContent = new ReviewContent();
+        for(Review r : reviews){
+            if(r.getReview_user() == user){
+                reviewContent.setText(r.getPcmReview());
+            }
+        }
 
         model.addAttribute("reviewTemplate", reviewTemplateName);
+        model.addAttribute("paper", paper);
+        model.addAttribute("reviewContent", reviewContent);
 
         return "ReviewContainer";
     }
 
-    @RequestMapping(value = "/PCMReview/SubmitReview", method = RequestMethod.POST)
-    public String submitReview(@ModelAttribute("reviewContent") ReviewContent reviewContent){
-        
+    @RequestMapping(value = "/PCMReview/SubmitReview/{paperId}", method = RequestMethod.POST)
+    public String submitReview(@ModelAttribute("reviewContent") ReviewContent reviewContent, @PathVariable("paperId") long paperId){
+        Review review = new Review(reviewContent.getText());
+        review.setPaper(paperService.findById(paperId));
+        review.setReview_user(user);
+        reviewService.save(review);
+
         return "redirect:/PCMReview/"+user.getId();
     }
 
     public class ReviewContent{
-        public List<String> text;
+        public List<String> text = new ArrayList<>(100);
 
         public List<String> getText(){
             return text;

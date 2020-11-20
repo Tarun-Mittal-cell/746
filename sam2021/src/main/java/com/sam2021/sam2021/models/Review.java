@@ -1,5 +1,8 @@
 package com.sam2021.sam2021.models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,8 +15,12 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.json.simple.JSONArray;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
 @Entity
-@Table(name="Review")
+@Table(name = "Review")
 public class Review {
 
     @Id
@@ -33,11 +40,11 @@ public class Review {
     public Review() {
     }
 
-    public Review(String pcmReview) {
-        this.pcmReview = pcmReview;
+    public Review(List<String> pcmReview) {
+        setPcmReview(pcmReview);
     }
 
-    //Getter
+    // Getter
     public Long getId() {
         return id;
     }
@@ -46,8 +53,21 @@ public class Review {
         return paper;
     }
 
-    public String getPcmReview() {
-        return pcmReview;
+    public List<String> getPcmReview() {
+        JSONParser parser = new JSONParser();
+        try {
+            JSONArray array = (JSONArray)parser.parse(pcmReview);
+            String [] textArray = (String[])array.toArray();
+            List<String> text = new ArrayList<>();
+            for(String s : textArray){
+                text.add(s);
+            }
+            return text;
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return new ArrayList<String>();
     }
     public User getReview_user() {
         return review_user;
@@ -60,8 +80,8 @@ public class Review {
     public void setPaper(Paper paper) {
         this.paper = paper;
     }
-    public void setPcmReview(String pcmReview) {
-        this.pcmReview = pcmReview;
+    public void setPcmReview(List<String> pcmReview) {
+        this.pcmReview = JSONArray.toJSONString(pcmReview);
     }
     public void setReview_user(User review_user) {
         this.review_user = review_user;
