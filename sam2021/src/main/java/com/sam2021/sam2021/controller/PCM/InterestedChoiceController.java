@@ -40,7 +40,7 @@ public class InterestedChoiceController {
         model.addAttribute("user", user);
         this.topicId = topicId;
 
-        papers = paperService.getByTopic(topicId);
+        papers = paperService.findbytopicFalse(topicId);
         ipapers = new ArrayList<>();
 
         List<Paper> ownPapers = new ArrayList<>();
