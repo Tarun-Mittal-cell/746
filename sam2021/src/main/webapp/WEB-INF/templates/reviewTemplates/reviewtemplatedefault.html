@@ -1,12 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <style>
-        input {
-            resize: horizontal;
-            width: 50%;
-        }
-    </style>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -16,7 +10,7 @@
         <form th:action= "@{/Review/SubmitReview/{reviewId} (reviewId=${review.id})}" method ="post">
             <div th:fragment="reviewContent">
                 <label for="text[0]">Review</label>
-                <input type ="text" th:name="text[0]" class="form-control">
+                <textarea class="form-control" rows="9" id="text[0]" th:name="text[0]"></textarea>
             </div>
         </form>
     </div>
