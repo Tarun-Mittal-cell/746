@@ -35,7 +35,7 @@ public class InterestedChoiceController {
     private long topicId;
 
     @RequestMapping(value="/SelectInterested/{userId}/{topicId}", method = RequestMethod.GET)
-    public String displayHomepage(@PathVariable("userId") long userId, @PathVariable("topicId") long topicId, Model model){
+    public String displayPage(@PathVariable("userId") long userId, @PathVariable("topicId") long topicId, Model model){
         user = userService.findbyId(userId).get();
         model.addAttribute("user", user);
         this.topicId = topicId;
