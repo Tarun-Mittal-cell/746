@@ -2,11 +2,13 @@ package com.sam2021.sam2021.controller.PCC;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import org.json.*;
 import com.sam2021.sam2021.models.Paper;
 import com.sam2021.sam2021.models.User;
 import com.sam2021.sam2021.service.PaperService;
 import com.sam2021.sam2021.service.TopicService;
+
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -41,18 +43,14 @@ public class AssignPaperPCController {
         return "AssignPaperPCC";
     }
 
-    @RequestMapping(value = "/AssignPaperPCC", method = RequestMethod.GET)
-    public String AssignPCM( @ModelAttribute memberwrapper memberWrapper, Model model){
+    @RequestMapping(value = "/AssignPaperPCC/{topicid}/assign/{paperid}", method = RequestMethod.GET)
+    public String AssignPCM( @PathVariable("topicid") long topicid, @PathVariable("paperid") long paperid, @ModelAttribute memberwrapper memberWrapper, Model model){
         List<User> users = memberWrapper.getUserlist();
-        
-        for(User user: users){
-            System.out.print(user.getFtname());
-        }
-        
+        pservice.removnoneassigned(paperid, users);
 
-        return "AssignPaperPCC";
+        return "redirect:/AssignPaperPCC/" + topicid;
     }
-
+    
 
 }
 

@@ -50,7 +50,7 @@
                   <td th:text="${topic.Deadlines.reviewDeadline}"></td>
                   <td th:text="${topic.Deadlines.reviewDeadline}"></td>
                   <td><a type="button" class="btn btn-secondary" th:href="@{/AssignPaperPCC/{id}(id=${topic.id})}">Assign</a></td>
-                  <td><a type="button" class="btn btn-secondary">Report</a></td>
+                  <td><a type="button" class="btn btn-secondary" th:href="@{/PCCReview/{id}(id=${topic.id})}">Report</a></td>
                 </tr>
               </tbody>
             </table>
