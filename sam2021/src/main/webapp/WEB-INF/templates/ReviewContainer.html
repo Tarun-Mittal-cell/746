@@ -7,18 +7,8 @@
 </head>
 <body>
     <div class='container'>
-        <form th:action= "@{/PCMReview/SubmitReview}" method ="post">
+        <form th:action= "@{/PCMReview/SubmitReview}" method ="post" modelAttribute="reviewContent">
             <div th:replace="@{'/reviewTemplates/' + ${reviewTemplate}} :: reviewContent"></div>
-            <div class="form-group">
-                <label for="exampleInputEmail1">Rating</label>
-                <select class="form-control">
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option>
-                  <option>5</option>
-            </select>  
-            </div>
             <input type = "submit" name ="save_review">
         </form>
     </div>
