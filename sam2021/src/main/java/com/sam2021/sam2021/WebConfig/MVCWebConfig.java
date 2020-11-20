@@ -55,6 +55,7 @@ public class MVCWebConfig implements WebMvcConfigurer{
         templateResolver.setTemplateMode("HTML");
         return templateResolver;
     }
+    
     @Bean
     public ThymeleafViewResolver thymeleafViewResolver() {
         ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();

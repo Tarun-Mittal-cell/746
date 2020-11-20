@@ -41,7 +41,7 @@ public class AssignPaperPCController {
         return "AssignPaperPCC";
     }
 
-    @RequestMapping(value = "/AssignPaperPCC", method = RequestMethod.POST)
+    @RequestMapping(value = "/AssignPaperPCC", method = RequestMethod.GET)
     public String AssignPCM( @ModelAttribute memberwrapper memberWrapper, Model model){
         List<User> users = memberWrapper.getUserlist();
         
