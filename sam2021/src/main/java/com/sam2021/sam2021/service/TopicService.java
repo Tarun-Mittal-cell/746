@@ -17,4 +17,8 @@ public class TopicService {
     public List<Topic> getTopics(){
         return topicRepo.getAll();
     }
+
+    public Topic findById(long topicId){
+        return topicRepo.findById(topicId).get();
+    }
 }

@@ -36,4 +36,12 @@ public class PaperService {
     public List<Paper> getByTopic(long topicId){
         return paperRepo.findByTopic(topicId);
     }
+
+    public List<Paper> findByReviewer(long userId){
+        return paperRepo.FindAllPapers(userId);
+    }
+
+    public Paper findById(long paperId){
+        return paperRepo.getById(paperId);
+    }
 }

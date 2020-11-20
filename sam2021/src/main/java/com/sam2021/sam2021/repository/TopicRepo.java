@@ -17,5 +17,4 @@ public interface TopicRepo extends JpaRepository<Topic, Long> {
     
     List<Topic> findByChairman(User chairman);
     Optional<Topic> findById(Long id);
-
 }

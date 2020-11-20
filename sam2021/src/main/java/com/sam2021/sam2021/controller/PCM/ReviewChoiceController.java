@@ -45,6 +45,11 @@ public class ReviewChoiceController {
         return "HomepagePCM";
     }
 
+    @GetMapping(value = "/HomepagePCM/redirectReview")
+    public String redirectReview(Model Model){
+        return "redirect:/PCMReview/"+user.getId();
+    }
+
     @GetMapping(value = "/HomepagePCM/redirect/{topicId}")
     public String displaySelect(@PathVariable("topicId") long topicId, Model Model){
         return "redirect:/SelectInterested/"+user.getId()+"/"+topicId;

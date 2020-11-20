@@ -114,6 +114,10 @@ public class Paper {
 		return authors;
 	}
 
+	public Topic getTopic(){
+		return topic;
+	}
+
 	public void setAuthors(String authors) {
 		this.authors = authors;
 	}
