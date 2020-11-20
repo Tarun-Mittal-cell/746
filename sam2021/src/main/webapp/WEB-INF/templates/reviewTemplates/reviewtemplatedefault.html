@@ -14,7 +14,7 @@
 <body>
     <div class='container'>
         <form th:action= "@{/Review/SubmitReview/{reviewId} (reviewId=${review.id})}" method ="post">
-            <div th:fragment="content">
+            <div th:fragment="reviewContent">
                 <label for="text[0]">Review</label>
                 <input type ="text" th:name="text[0]" class="form-control">
             </div>
