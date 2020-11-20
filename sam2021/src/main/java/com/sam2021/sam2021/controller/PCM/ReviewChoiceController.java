@@ -21,9 +21,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class ReviewChoiceController {
     @Autowired
-    private PaperService paperService;
-
-    @Autowired
     private TopicService topicService;
 
     @Autowired
