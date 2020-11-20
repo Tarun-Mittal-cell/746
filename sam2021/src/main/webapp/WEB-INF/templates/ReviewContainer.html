@@ -7,7 +7,7 @@
 </head>
 <body>
     <div class='container'>
-        <form th:action= "@{/PCMReview/SubmitReview/{paperId} (paperId=${paper.id})}" method ="post" modelAttribute="reviewContent">
+        <form th:action= "@{/PCMReview/SubmitReview/{paperId} (paperId=${paper.id})}" method ="post" modelAttribute="reviewText">
             <div th:replace="@{'/reviewTemplates/' + ${reviewTemplate}} :: reviewContent"></div>
             <input class="btn btn-success" type = "submit" name ="save_review">
         </form>

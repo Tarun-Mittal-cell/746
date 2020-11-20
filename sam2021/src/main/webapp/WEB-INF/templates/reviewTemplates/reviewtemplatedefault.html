@@ -10,7 +10,7 @@
         <form th:action= "@{/Review/SubmitReview/{reviewId} (reviewId=${review.id})}" method ="post">
             <div th:fragment="reviewContent">
                 <label for="text[0]">Review</label>
-                <textarea class="form-control" rows="9" id="text[0]" th:name="text[0]" th:value="text[0]"></textarea>
+                <textarea class="form-control" rows="9" id="text[0]" th:name="text[0]" th:value="${text[0]}"></textarea>
             </div>
         </form>
     </div>

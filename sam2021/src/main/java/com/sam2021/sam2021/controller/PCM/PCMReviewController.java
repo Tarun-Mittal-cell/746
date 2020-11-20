@@ -73,16 +73,16 @@ public class PCMReviewController {
 
         model.addAttribute("reviewTemplate", reviewTemplateName);
         model.addAttribute("paper", paper);
-        model.addAttribute("reviewContent", reviewContent);
+        model.addAttribute("reviewText", reviewContent);
 
         return "ReviewContainer";
     }
 
     @RequestMapping(value = "/PCMReview/SubmitReview/{paperId}", method = RequestMethod.POST)
-    public String submitReview(@ModelAttribute("reviewContent") ReviewContent reviewContent, @PathVariable("paperId") long paperId){
+    public String submitReview(@ModelAttribute("reviewText") ReviewContent reviewContent, @PathVariable("paperId") long paperId){
         Review review = new Review(reviewContent.getText());
         review.setPaper(paperService.findById(paperId));
-        review.setReview_user(user);
+        review.setReview_user(userService.findbyId(user.getId()).get());
         reviewService.save(review);
 
         return "redirect:/PCMReview/"+user.getId();
