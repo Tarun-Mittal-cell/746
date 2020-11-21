@@ -14,6 +14,9 @@ public interface PaperRepo extends JpaRepository<Paper, Long> {
     @Query("FROM Paper WHERE id=?1")
     Paper findById(long id);
 
+    @Query("FROM Paper WHERE id=?1")
+    Paper findByIdd(long id); 
+
     @Query("SELECT a, b FROM Paper a JOIN a.topic b WHERE a.assigned = 'F' and b.id = ?1")
     List<Paper> findByTopic(Long id);
 
@@ -23,7 +26,9 @@ public interface PaperRepo extends JpaRepository<Paper, Long> {
     @Query("FROM Paper WHERE filename = ?1")
     Paper findByFilename(String filename);
 
-    @Query("from Paper p join p.users u where u.id = ?1")
+    @Query("from Paper p join p.contactAuthor u where u.id = ?1")
     public List<Paper> FindAllPapers(Long id);
+
+
 
 }

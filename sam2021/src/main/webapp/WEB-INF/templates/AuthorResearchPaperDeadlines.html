@@ -52,7 +52,7 @@
         <div class="col-sm mx-auto" style="width: 400px; padding: 10px;">
           <h1 class="display-4  text-center" style="font-size: 45px;">Submit Paper</h1>
           <div class="container-fluid rounded" style="height:500px; border:2px solid #cecece; padding: 16px;">
-            <form method = "post"  th:action="@{/AuthorResearchPaperDeadlines}" enctype="multipart/form-data" th:object="${paper}">
+            <form enctype="multipart/form-data" th:object="${paper}">
               <div class="form-group">
                 <input  type ="title" name="title" th:field="*{title}" class="form-control"  placeholder="Title">
                 <p class="error-message" th:each="error : ${#fields.errors('title')}" th:text="${error}">Validation error</p>
@@ -87,7 +87,7 @@
                     <input type="file" name = "file" class="custom-file-input" id="customFile">
                     <label class="custom-file-label" for="customFile">Choose file</label>
               </div>
-              <button type="submit" class="btn btn-primary btn-sm" style="width:200px" >Submit</button>
+              <button type="submit" class="btn btn-primary btn-sm" style="width:200px" th:href="@{/AuthorResearchPaperDeadlines/submit/{id}(id=${id})}" >Submit</button>
             </form>
           </div>
         </div>

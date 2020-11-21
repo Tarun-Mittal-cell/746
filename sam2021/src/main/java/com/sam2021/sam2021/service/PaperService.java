@@ -32,6 +32,7 @@ public class PaperService {
             paper.getReviewers().add(user);
         }
 
+
         paperRepo.save(paper);
     }
 
@@ -62,8 +63,19 @@ public class PaperService {
     }
 
     public List<Paper> FindAllPapers(Long id){
-        return paperRepo.FindAllPapers(id);
+        System.out.print(id);
+        List<Paper> papers = paperRepo.FindAllPapers(id);
+        System.out.print(papers.isEmpty());
+        return papers;
     }
     
+    public void removnoneassigned(Long paperId, List<User> users){
+        Paper paper = paperRepo.findByIdd(paperId);
+    
+        paper.getReviewers().retainAll(users);
+        paper.setAssigned(true);
+
+        paperRepo.save(paper);
+    }
 
 }
