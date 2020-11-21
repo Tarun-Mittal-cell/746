@@ -19,11 +19,11 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-          <li class="nav-item active">
-            <a class="nav-link" th:href="@{/HomepagePCM/{id}(id=${user.id})}">Review Choice Deadlines</a>
-          </li>
           <li class="nav-item">
-            <a class="nav-link" th:href="@{/HomepagePCM/redirectReview}">Review</a>
+            <a class="nav-link" th:href="@{/PCMReview/redirectHome}">Review Choice Deadlines</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" th:href="@{/PCMReview/{userId}(userId=${user.id})}">Review</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/Research paper deadlines-PCM.html">Research Paper Deadlines</a>
@@ -39,24 +39,26 @@
     <div class="container">
         <div class="row">
           <div class="col-sm mx-auto text-center" style="width: 100px; padding: 10px;">
-            <h1 class="display-4" style="font-size: 45px;">Review Choice Deadlines</h1>
+            <h1 class="display-4" style="font-size: 45px;">Review Deadlines</h1>
             <div class="container-fluid rounded" style="height:500px; border:2px solid #cecece; padding: 1px;">
                 <table class="table">
                     <thead class="thead-light">
                         <tr>
                         <th scope="col">#</th>
+                        <th scope="col">Title</th>
                         <th scope="col">Topic</th>
-                        <th scope="col">Deadline Date</th>
-                        <th scope="col">Submissions</th>
+                        <th scope="col">Deadline</th>
+                        <th scope="col">Review</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr th:each="topict : ${topics}">
-                          <td th:text="${topict.id}"></td>
-                          <td th:text="${topict.name}"></td>
-                          <td th:text="${topict.deadlines.reviewChoiceDeadline}"></td>
+                        <tr th:each="paperp : ${papers}">
+                          <td th:text="${paperp.id}"></td>
+                          <td th:text="${paperp.title}"></td>
+                          <td th:text="${paperp.topic.name}"></td>
+                          <td th:text="${paperp.topic.deadlines.reviewDeadline}"></td>
                           <td>
-                            <a type="button" class="btn btn-secondary" th:href="@{/HomepagePCM/redirect/{topicId}(topicId=${topict.id})}">View Submissions</a>
+                            <a type="button" class="btn btn-secondary" th:href="@{/PCMReview/select/{paperId}(paperId=${paperp.id})}">Review</a>
                           </td>
                         </tr>
                     </tbody>

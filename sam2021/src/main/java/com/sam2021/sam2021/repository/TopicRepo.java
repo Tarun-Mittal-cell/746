@@ -10,8 +10,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-public interface TopicRepo extends JpaRepository<Topic, Long> {
-    
+public interface TopicRepo extends JpaRepository<Topic, Long> { 
     List<Topic> findByChairman(User chairman);
     Optional<Topic> findById(Long id);
     

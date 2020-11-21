@@ -91,7 +91,7 @@
                     <div class="form-group" style="font-size: medium;">
                       <label for="sel1">Select Review Template</label>
                       <select name="reviewtemp" id="reviewtemp" class="form-control" style="font-size: medium;">
-                        <option value="">Select Role</option>
+                        <option value="">Select</option>
                         <option th:each="revT : ${ReviewTemps}" th:value="${revT.id}" th:text="${revT.filename}"></option>
                       </select>
                     </div>

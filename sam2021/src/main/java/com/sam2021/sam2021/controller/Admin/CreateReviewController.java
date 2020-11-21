@@ -37,7 +37,7 @@ public class CreateReviewController {
         }
         try{
             revservice.save(file.getOriginalFilename());
-            File destinationFile = new File(context.getRealPath("/WEB-INF/ReviewTemplates")+  File.separator + file.getOriginalFilename());
+            File destinationFile = new File(context.getRealPath("/WEB-INF/templates/reviewTemplates")+  File.separator + file.getOriginalFilename());
             file.transferTo(destinationFile);
         }catch (IOException e) {
             e.printStackTrace();

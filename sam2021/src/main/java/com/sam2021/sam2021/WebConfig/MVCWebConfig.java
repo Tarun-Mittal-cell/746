@@ -22,7 +22,7 @@ public class MVCWebConfig implements WebMvcConfigurer{
 
         //Login
         registry.addViewController("/registration.html").setViewName("registration.html");
-        registry.addViewController("/login.html").setViewName("login.html");
+        registry.addViewController("/login").setViewName("login.html");
         registry.addViewController("/").setViewName("login.html");
 
         registry.addViewController("/AuthorResearchPaperDeadlines").setViewName("AuthorResearchPaperDeadlines.html");
@@ -33,6 +33,12 @@ public class MVCWebConfig implements WebMvcConfigurer{
         registry.addViewController("/CreateReview").setViewName("CreateReview.html");
         registry.addViewController("/CreateNotificationTemplateAdmin").setViewName("CreateNotificationTemplateAdmin.html");
         registry.addViewController("/CreateDeadline").setViewName("CreateDeadline.html");
+
+        //PCM
+        registry.addViewController("/HomepagePCM").setViewName("HomepagePCM.html");
+        registry.addViewController("/SelectInterested").setViewName("SelectInterested.html");
+        registry.addViewController("/ReviewContainer").setViewName("ReviewContainer.html");
+        registry.addViewController("/PCMReview").setViewName("PCMReview.html");
 
         //PCC
         registry.addViewController("/AssignPaperPCC").setViewName("AssignPaperPCC.html");

@@ -12,7 +12,7 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface PaperRepo extends JpaRepository<Paper, Long> {
     @Query("FROM Paper WHERE id=?1")
-    Paper findById(long id); 
+    Paper findById(long id);
 
     @Query("FROM Paper WHERE id=?1")
     Paper findByIdd(long id); 
