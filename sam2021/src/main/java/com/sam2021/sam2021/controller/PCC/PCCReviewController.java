@@ -18,7 +18,7 @@ public class PCCReviewController {
     private PaperService pservice;
     
     @GetMapping(value = "/PCCReview/{id}")
-    public String displayReviewDeadlines(Model model, @PathVariable("id") long id){
+    public String displayReviewPCC(Model model, @PathVariable("id") long id){
 
         List<Paper> papers = pservice.findByTopic(id);
         model.addAttribute("papers", papers);

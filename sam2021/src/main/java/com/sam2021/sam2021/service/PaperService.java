@@ -62,7 +62,10 @@ public class PaperService {
     }
 
     public List<Paper> FindAllPapers(Long id){
-        return paperRepo.FindAllPapers(id);
+        System.out.print(id);
+        List<Paper> papers = paperRepo.FindAllPapers(id);
+        System.out.print(papers.isEmpty());
+        return papers;
     }
     
     public void removnoneassigned(Long paperId, List<User> users){
