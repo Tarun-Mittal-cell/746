@@ -11,15 +11,24 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 public interface PaperRepo extends JpaRepository<Paper, Long> {
-    Optional<Paper> findById(Long id);
+    @Query("FROM Paper WHERE id=?1")
+    Paper findById(long id); 
+
+    @Query("FROM Paper WHERE id=?1")
+    Paper findByIdd(long id); 
 
     @Query("SELECT a, b FROM Paper a JOIN a.topic b WHERE a.assigned = 'F' and b.id = ?1")
     List<Paper> findByTopic(Long id);
 
+    @Query("FROM Paper WHERE topic_id=?1")
+    List<Paper> findAllByTopic(long id);
+
     @Query("FROM Paper WHERE filename = ?1")
     Paper findByFilename(String filename);
 
-    @Query("from Paper p join p.users u where u.id = ?1")
+    @Query("from Paper p join p.contactAuthor u where u.id = ?1")
     public List<Paper> FindAllPapers(Long id);
+
+
 
 }

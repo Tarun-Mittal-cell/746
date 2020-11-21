@@ -37,6 +37,7 @@ public class MVCWebConfig implements WebMvcConfigurer{
         //PCC
         registry.addViewController("/AssignPaperPCC").setViewName("AssignPaperPCC.html");
         registry.addViewController("/ReviewDeadlinesPCC").setViewName("ReviewDeadlinesPCC.html");
+        registry.addViewController("/generatereport").setViewName("generatereport.html");
     }
 
     @Bean
@@ -55,6 +56,7 @@ public class MVCWebConfig implements WebMvcConfigurer{
         templateResolver.setTemplateMode("HTML");
         return templateResolver;
     }
+    
     @Bean
     public ThymeleafViewResolver thymeleafViewResolver() {
         ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
