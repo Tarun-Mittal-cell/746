@@ -65,7 +65,7 @@ public class PCMReviewController {
 
         Review review = reviewService.findOwnReview(user.getId(), paperId);
         ReviewContent reviewContent = new ReviewContent();
-        if(review.getReview_user() == user){
+        if(review != null && review.getReview_user() == user){
             reviewContent.setText(review.getPcmReview());
             model.addAttribute("reviewText", reviewContent);
         }
